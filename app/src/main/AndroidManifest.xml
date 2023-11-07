@@ -13,7 +13,10 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity2"
+            android:name=".duytam.Playlist"
+            android:exported="false" />
+        <activity
+            android:name=".duytam.Trangchu"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
