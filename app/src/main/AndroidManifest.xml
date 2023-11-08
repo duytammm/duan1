@@ -13,6 +13,7 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".ManHinhChaoActivity"
             android:exported="false" />
         <activity
@@ -20,6 +21,12 @@
             android:exported="false" />
         <activity
             android:name=".DangKyActivity"
+=======
+            android:name=".duytam.Playlist"
+            android:exported="false" />
+        <activity
+            android:name=".duytam.Trangchu"
+>>>>>>> a983d6ec4a1b8f93e10c86273d47926bfd7e51cd
             android:exported="false" />
         <activity
             android:name=".MainActivity"
