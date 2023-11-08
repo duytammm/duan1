@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
-public class TimKiemNoiBac_Fragment extends Fragment {
-    private RecyclerView rcvNoiBac;
+public class TK_QuanLy_fragment extends Fragment {
+    private CardView cvQLTaiKhoan, cvTaoTK, cvQLBH, cvQLHD, cvSetting, cvDX;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,8 +21,13 @@ public class TimKiemNoiBac_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.timkiem_noibac_fragment,container,false);
-        rcvNoiBac = v.findViewById(R.id.rcvNoiBac);
+        View v = inflater.inflate(R.layout.taikhoanquanly_fragment,container,false);
+        cvQLTaiKhoan = v.findViewById(R.id.cvQLTaiKhoan);
+        cvTaoTK = v.findViewById(R.id.cvTaoTK);
+        cvQLBH = v.findViewById(R.id.cvQLBH);
+        cvQLHD = v.findViewById(R.id.cvQLHD);
+        cvSetting = v.findViewById(R.id.cvSetting);
+        cvDX = v.findViewById(R.id.cvDX);
 
         return v;
     }

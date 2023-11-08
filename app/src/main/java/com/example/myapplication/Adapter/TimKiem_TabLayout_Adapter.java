@@ -1,9 +1,12 @@
-package com.example.myapplication;
+package com.example.myapplication.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.myapplication.TimKiemNoiBac_Fragment;
+import com.example.myapplication.TimKiemTrending_Fragment;
 
 public class TimKiem_TabLayout_Adapter extends FragmentStateAdapter {
     public TimKiem_TabLayout_Adapter(@NonNull Fragment fragment) {

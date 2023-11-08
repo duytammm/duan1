@@ -9,6 +9,7 @@
 
 
 
+<<<<<<< HEAD
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="800px"
@@ -52,5 +53,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+=======
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcyPlaylist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+>>>>>>> a0f0434b60f310b936305a5dcf0d8bd8bff59936
 
 </LinearLayout>
