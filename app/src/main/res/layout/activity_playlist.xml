@@ -8,7 +8,7 @@
     android:background="#1E1F26"
     tools:context=".duytam.Playlist">
 
-  
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcyPlaylist"
