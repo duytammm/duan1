@@ -13,15 +13,9 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
-            android:name=".duytam.Chitietnhac"
-            android:exported="false" />
-        <activity
-            android:name=".duytam.Playlist"
-=======
             android:name=".ManHinhChaoActivity"
->>>>>>> a0f0434b60f310b936305a5dcf0d8bd8bff59936
             android:exported="false" />
+
         <activity
             android:name=".DangNhapActivity"
             android:exported="false" />
