@@ -31,7 +31,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/itemnhac_love"/>
+            android:src="@drawable/item_nhac"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
