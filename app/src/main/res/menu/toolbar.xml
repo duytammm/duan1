@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/all"
+        android:title="Tất cả"
+        android:icon="@drawable/toolbar_all"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/nhac"
+        android:title="Nhạc"
+        android:icon="@drawable/toolbar_nhac"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/podcast"
+        android:title="Podcast"
+        android:icon="@drawable/toolbar_podcast"
+        app:showAsAction="always"/>
+</menu>

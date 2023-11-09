@@ -1,69 +1,97 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
-import com.example.myapplication.Adapter.SlideShow_Adapter;
-import com.example.myapplication.model.SlideShow;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import me.relex.circleindicator.CircleIndicator;
 
 public class MainActivity extends AppCompatActivity {
-    private LinearLayout phoXaXonXao, CaFe, playlist1, playlist2;
-    private ImageView imgplaylist1, imgplaylist2;
-    private TextView tv1, tv2;
-    BottomNavigationView bottomNagigatiom;
+    private FrameLayout framLayout;
+    private BottomNavigationView bottomNagigatiom;
     private Toolbar toolbar;
+    private RelativeLayout constrain;
 
-    //Slide show sử dụng sự hỗ trợ của hai thư viện bên ngoài: CircleIndicator và glide của git
-    private ViewPager viewPager;
-    private CircleIndicator cirCle;
-    private List<SlideShow> lst;
-
-    private void anhXaView() {
-        toolbar = findViewById(R.id.toolbar);
-        viewPager = findViewById(R.id.viewPager);
-        cirCle = findViewById(R.id.cirCle);
-        phoXaXonXao = findViewById(R.id.phoXaXonXao);
-        CaFe = findViewById(R.id.CaFe);
-        playlist1 = findViewById(R.id.playlist1);
-        playlist2 = findViewById(R.id.playlist2);
-        imgplaylist1 = findViewById(R.id.imgplaylist1);
-        imgplaylist2 = findViewById(R.id.imgplaylist2);
-        tv1 = findViewById(R.id.tv1);
-        tv2 = findViewById(R.id.tv2);
-        bottomNagigatiom = findViewById(R.id.bottomNagigatiom);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        anhXaView();
+        toolbar = findViewById(R.id.toolbar);
+        bottomNagigatiom = findViewById(R.id.bottomNagigatiom);
+        framLayout = findViewById(R.id.framLayout);
+        constrain = findViewById(R.id.constrain);
 
-        SlideShow_Adapter adapter = new SlideShow_Adapter(MainActivity.this,lst());
-        viewPager.setAdapter(adapter);
-        cirCle.setViewPager(viewPager);
-        adapter.registerDataSetObserver(cirCle.getDataSetObserver());
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_music);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.framLayout,new Main_Home())
+                .commit();
+
+        bottomNagigatiom.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.home) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.framLayout, new Main_Home())
+                            .commit();
+                }
+                if (item.getItemId() == R.id.search) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.framLayout, new TimKiem_Fragment())
+                            .commit();
+                }
+                if (item.getItemId() == R.id.library) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.framLayout, new ThuVien_Fragment())
+                            .commit();
+                }
+                if (item.getItemId() == R.id.account) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.framLayout, new TK_QuanLy_fragment())
+                            .commit();
+                }
+                toolbar.setTitle(item.getTitle());
+            }
+        });
     }
 
-    private List<SlideShow> lst() {
-        lst = new ArrayList<>();
-        lst.add(new SlideShow(R.drawable.trangchu_banner1));
-        lst.add(new SlideShow(R.drawable.trangchu_banner2));
-        lst.add(new SlideShow(R.drawable.trangchu_banner3));
-        lst.add(new SlideShow(R.drawable.trangchu_banner4));
-        lst.add(new SlideShow(R.drawable.trangchu_banner5));
-        return lst;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.toolbar,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.framLayout,new Main_Home())
+                    .commit();
+            Toast.makeText(this, "Trang chủ", Toast.LENGTH_SHORT).show();
+        }
+        if(item.getItemId() == R.id.all) {
+            Toast.makeText(this, "Tất cả", Toast.LENGTH_SHORT).show();
+        }
+        if(item.getItemId() == R.id.nhac) {
+            Toast.makeText(this, "Nhạc", Toast.LENGTH_SHORT).show();
+        }
+        if(item.getItemId() == R.id.podcast) {
+            Toast.makeText(this, "Podcast và chương trình", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
