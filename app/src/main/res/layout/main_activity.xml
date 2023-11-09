@@ -23,8 +23,28 @@
         android:layout_below="@+id/toolbar"
          />
 
+<<<<<<< HEAD
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNagigatiom"
+=======
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/cirCle"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            tools:ignore="MissingClass" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/phoXaXonXao"
+>>>>>>> 8b3c59360a4965cba184dab1ed8b4a0280917ec7
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#000"
