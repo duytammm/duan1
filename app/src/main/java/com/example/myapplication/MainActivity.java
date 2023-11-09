@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         constrain = findViewById(R.id.constrain);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_music);
 
