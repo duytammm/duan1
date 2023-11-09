@@ -13,7 +13,12 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".ManHinhChaoActivity"
+=======
+
+            android:name=".duytam.Chitietnhac"
+>>>>>>> 24108916c5dc47eb81ffee1f9a0157916c3d1e56
             android:exported="false" />
 
         <activity
