@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout phoXaXonXao, CaFe, playlist1, playlist2;
     private ImageView imgplaylist1, imgplaylist2;
     private TextView tv1, tv2;
-    BottomNavigationView bottomNagigatiom
+    BottomNavigationView bottomNagigatiom;
     private Toolbar toolbar;
 
     //Slide show sử dụng sự hỗ trợ của hai thư viện bên ngoài: CircleIndicator và glide của git
