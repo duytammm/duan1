@@ -1,6 +1,7 @@
 package com.example.myapplication.duytam;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 
@@ -13,4 +14,7 @@ public class Trangchu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trangchu);
     }
+
+
+
 }
