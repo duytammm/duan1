@@ -33,7 +33,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="30dp"
-            app:srcCompat="@drawable/user"
+            app:srcCompat="@drawable/dangky_user"
             android:layout_weight="1"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="10dp"/>
@@ -65,7 +65,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="30dp"
-            app:srcCompat="@drawable/show"
+            app:srcCompat="@drawable/dangky_show"
             android:layout_weight="1"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="10dp"/>
