@@ -23,10 +23,12 @@
         android:layout_below="@+id/toolbar"
          />
 
-<<<<<<< HEAD
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNagigatiom"
-=======
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
@@ -40,17 +42,7 @@
             android:layout_marginTop="10dp"
             tools:ignore="MissingClass" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/phoXaXonXao"
->>>>>>> 8b3c59360a4965cba184dab1ed8b4a0280917ec7
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#000"
-        app:menu="@menu/bottom_menu"
-        app:itemIconTint="@color/white"
-        app:labelVisibilityMode="unlabeled"
-        android:layout_alignParentBottom="true"/>
 
-</RelativeLayout>
+
