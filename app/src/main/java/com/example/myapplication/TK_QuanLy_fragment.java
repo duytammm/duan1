@@ -1,9 +1,11 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +30,22 @@ public class TK_QuanLy_fragment extends Fragment {
         cvQLHD = v.findViewById(R.id.cvQLHD);
         cvSetting = v.findViewById(R.id.cvSetting);
         cvDX = v.findViewById(R.id.cvDX);
+
+        cvQLTaiKhoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), QLTK_Activity.class);
+                startActivity(i);
+            }
+        });
+
+        cvDX.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), DangNhapActivity.class);
+                startActivity(i);
+            }
+        });
 
         return v;
     }

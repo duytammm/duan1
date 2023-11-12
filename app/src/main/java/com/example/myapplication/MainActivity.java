@@ -3,6 +3,9 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         constrain = findViewById(R.id.constrain);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Trang chủ");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_music);
 
@@ -67,32 +69,5 @@ public class MainActivity extends AppCompatActivity {
                 toolbar.setTitle(item.getTitle());
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.toolbar,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.framLayout,new Main_Home())
-                    .commit();
-            Toast.makeText(this, "Trang chủ", Toast.LENGTH_SHORT).show();
-        }
-        if(item.getItemId() == R.id.all) {
-            Toast.makeText(this, "Tất cả", Toast.LENGTH_SHORT).show();
-        }
-        if(item.getItemId() == R.id.nhac) {
-            Toast.makeText(this, "Nhạc", Toast.LENGTH_SHORT).show();
-        }
-        if(item.getItemId() == R.id.podcast) {
-            Toast.makeText(this, "Podcast và chương trình", Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
