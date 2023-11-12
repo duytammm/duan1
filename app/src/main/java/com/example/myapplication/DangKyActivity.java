@@ -22,32 +22,33 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class DangKyActivity extends AppCompatActivity {
-    Button btTV,btDK;
+    Button btTroVe,btDangKy;
     EditText edttenDK,edtMatKhau,edtNLMatKhau;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent i=new Intent(getApplicationContext(), Main_Home.class);
-            startActivity(i);
-            finish();
-        }
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null){
+//            Intent i=new Intent(getApplicationContext(), Main_Home.class);
+//            startActivity(i);
+//            finish();
+//        }
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ky);
-         btTV = findViewById(R.id.btTroVe);
+        btDangKy = findViewById(R.id.btDangKy);
+        btTroVe = findViewById(R.id.btTroVe);
         edttenDK=findViewById(R.id.edtTenDK);
         edtMatKhau=findViewById(R.id.edtMatKhau);
         edtNLMatKhau=findViewById(R.id.edtNLMatKhau);
         mAuth=FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progressbar);
-        btDK.setOnClickListener(new View.OnClickListener() {
+        btDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
@@ -76,6 +77,9 @@ public class DangKyActivity extends AppCompatActivity {
 
                                     Toast.makeText(DangKyActivity.this, "Dang ky thanh cong",
                                             Toast.LENGTH_SHORT).show();
+                                    Intent i=new Intent(getApplicationContext(), DangNhapActivity.class);
+                                    startActivity(i);
+                                    finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(DangKyActivity.this, "Dang ky that bai",
@@ -87,7 +91,7 @@ public class DangKyActivity extends AppCompatActivity {
             }
         });
 
-        btTV.setOnClickListener(new View.OnClickListener() {
+        btTroVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

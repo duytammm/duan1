@@ -22,17 +22,17 @@ public class DangNhapActivity extends AppCompatActivity {
     EditText edtTenDN,edtMatKhau;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent i=new Intent(getApplicationContext(), Main_Home.class);
-            startActivity(i);
-            finish();
-        }
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null){
+//            Intent i=new Intent(getApplicationContext(), Main_Home.class);
+//            startActivity(i);
+//            finish();
+//        }
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +67,7 @@ public class DangNhapActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(DangNhapActivity.this, "Dang nhap thanh cong",
                                             Toast.LENGTH_SHORT).show();
-                                    Intent i=new Intent(getApplicationContext(), Main_Home.class);
+                                    Intent i=new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(i);
                                     finish();
                                 } else {
