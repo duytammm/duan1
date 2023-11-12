@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+<<<<<<< HEAD
         <activity
             android:name=".QLTK_Activity"
             android:exported="true" >
@@ -22,14 +23,26 @@
         <activity
             android:name=".ManHinhChaoActivity"
             android:exported="false" />
+=======
+
+>>>>>>> 7cc6f7d3d969d406492ac1eb92d34148417db917
         <activity
             android:name=".DangNhapActivity"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
             android:name=".DangKyActivity"
             android:exported="false" />
         <activity
+=======
+>>>>>>> 7cc6f7d3d969d406492ac1eb92d34148417db917
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DangKyActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ManHinhChaoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
