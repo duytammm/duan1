@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
 import com.example.myapplication.model.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder>{
@@ -39,7 +39,7 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder>{
         if(user == null) {
             return;
         }
-        Glide.with(c).load(user.getAvatar())
+        Glide.with(c).load(Uri.parse(user.getAvatar()))
                         .into(holder.imgAvatar);
         holder.tvID.setText("ID: " + user.getIdUser());
         holder.tvMail.setText("Mail: " + user.getEmail());

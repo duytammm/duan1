@@ -72,31 +72,4 @@ public class QLTK_Activity extends AppCompatActivity {
         });
     }
 
-//    private static void getUserAvatar(String userId) {
-//        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
-//        DatabaseReference userRef = databaseRef.child("USER").child(userId);
-//
-//        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.exists()) {
-//                    String avatarUrl = dataSnapshot.child("avatarUrl").getValue(String.class);
-//                    if (avatarUrl != null) {
-//                        System.out.println("Đường dẫn avatar: " + avatarUrl);
-//                        // Tiếp tục xử lý avatar, ví dụ: hiển thị hoặc tải về
-//                    } else {
-//                        System.out.println("Không tìm thấy avatar cho ID: " + userId);
-//                    }
-//                } else {
-//                    System.out.println("Không tìm thấy người dùng với ID: " + userId);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                System.out.println("Lỗi khi lấy thông tin avatar: " + databaseError.getMessage());
-//            }
-//        });
-//    }
-
 }
