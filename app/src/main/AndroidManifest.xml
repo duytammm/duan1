@@ -14,22 +14,46 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
         <activity
             android:name=".QLTK_Activity"
             android:exported="true" >
 
         </activity>
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
         <activity
             android:name=".DangNhapActivity"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
             android:name=".DangKyActivity"
             android:exported="true" >
 
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".MainActivity"
             android:exported="true" >
+=======
+
+            android:name=".MainActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ManHinhChaoActivity"
+            android:exported="true">
+>>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
