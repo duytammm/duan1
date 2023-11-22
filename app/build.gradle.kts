@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -30,35 +28,8 @@ android {
     }
 
     packagingOptions {
-        exclude ("META-INF/**")
+        exclude("META-INF/**")
     }
-
-    dependencies {
-
-        implementation("androidx.appcompat:appcompat:1.6.1")
-        implementation("com.google.android.material:material:1.10.0")
-        implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-        testImplementation("junit:junit:4.13.2")
-        androidTestImplementation("androidx.test.ext:junit:1.1.5")
-        androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
-        //Firebase
-        implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
-        implementation("com.google.firebase:firebase-database")
-        implementation("com.google.firebase:firebase-analytics")
-
-        //Thư viện tạo slideshow
-        implementation("me.relex:circleindicator:2.1.6")
-        implementation("com.github.bumptech.glide:glide:4.16.0")
-
-        //Lưu ảnh trên firebase
-        implementation("com.google.firebase:firebase-storage")
-        implementation ("com.firebaseui:firebase-ui-database:8.0.2")
-    }
-<<<<<<< HEAD
-=======
-
->>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
 }
 
 dependencies {
@@ -66,41 +37,26 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-<<<<<<< HEAD
     implementation("androidx.databinding:databinding-compiler:8.1.3")
     implementation("com.google.firebase:firebase-database:20.3.0")
-    implementation("com.google.firebase:firebase-auth:22.2.0")
-=======
-
-    implementation("androidx.databinding:databinding-compiler:8.1.3")
-    implementation("com.google.firebase:firebase-database:20.3.0")
-
-    implementation("com.google.firebase:firebase-auth:22.2.0")
-
->>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    //Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
-    implementation("com.google.firebase:firebase-analytics")
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
+    implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-storage")
+    implementation ("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-database:20.0.0")
 
-    //Thư viện tạo slideshow
+    // Thư viện tạo slideshow
     implementation ("me.relex:circleindicator:2.1.6")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
-<<<<<<< HEAD
-    implementation ("me.relex:circleindicator:1.3.2")
-    implementation ("me.relex:circleindicator:2.1.6")
+
+    // Circle Image
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
 
 }
-
-=======
-
-
-};
-
-
-
->>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56

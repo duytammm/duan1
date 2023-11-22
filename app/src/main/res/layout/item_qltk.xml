@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
+    android:id="@+id/itemUser"
     android:layout_marginBottom="20dp"
     android:backgroundTint="#D0E1F9">
 
@@ -13,33 +14,36 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imgAvatar"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/avatar_null"
+            app:civ_border_width="1dp"
             android:layout_marginRight="10dp"
-            android:layout_gravity="center_vertical"
-            app:cardCornerRadius="70dp">
+            app:civ_border_color="#FDFDFD"/>
 
-            <ImageView
-                android:id="@+id/imgAvatar"
-                android:scaleType="centerCrop"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@drawable/trangchu_cafe" />
-        </androidx.cardview.widget.CardView>
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginRight="10dp"-->
+        <!--            android:layout_gravity="center_vertical"-->
+        <!--            app:cardCornerRadius="70dp">-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/imgAvatar"-->
+        <!--                android:scaleType="centerCrop"-->
+        <!--                android:layout_width="120dp"-->
+        <!--                android:layout_height="120dp"-->
+        <!--                android:src="@drawable/trangchu_cafe" />-->
+        <!--        </androidx.cardview.widget.CardView>-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
 
             <TextView
                 android:id="@+id/tvMail"
@@ -71,13 +75,6 @@
 
             <TextView
                 android:id="@+id/tvTrangThai"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/tvNgaySinh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

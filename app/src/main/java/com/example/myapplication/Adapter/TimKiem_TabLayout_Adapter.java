@@ -2,14 +2,10 @@ package com.example.myapplication.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.myapplication.TimKiemNoiBac_Fragment;
 import com.example.myapplication.TimKiemTrending_Fragment;
-import com.example.myapplication.TimKiem_Fragment;
 
 public class TimKiem_TabLayout_Adapter extends FragmentStateAdapter {
 

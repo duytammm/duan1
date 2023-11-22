@@ -25,10 +25,6 @@
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp" />
 
-<<<<<<< HEAD
-=======
-
->>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNagigatiom"
         android:layout_width="match_parent"
@@ -38,34 +34,5 @@
         app:itemIconTint="#fff"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_menu" />
-<<<<<<< HEAD
-=======
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNagigatiom1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="220dp" />
-
-        <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/cirCle"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            tools:ignore="MissingClass" />
->>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
-
-    </RelativeLayout>
-
-
-<<<<<<< HEAD
-=======
-
->>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
-
+</RelativeLayout>

@@ -30,22 +30,22 @@
         android:textStyle="bold"
         android:textColor="@color/white"/>
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        android:layout_marginLeft="20dp">-->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:layout_marginLeft="20dp">-->
 
-<!--        -->
+    <!--        -->
 
-<!--&lt;!&ndash;        <TextView&ndash;&gt;-->
-<!--&lt;!&ndash;            android:id="@+id/tvSTT"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_width="280dp"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:text="Nghe si  "&ndash;&gt;-->
-<!--&lt;!&ndash;            android:textSize="20dp"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:textColor="@color/white"/>&ndash;&gt;-->
-<!--    </LinearLayout>-->
+    <!--&lt;!&ndash;        <TextView&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:id="@+id/tvSTT"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:layout_width="280dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:text="Nghe si  "&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:textSize="20dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:textColor="@color/white"/>&ndash;&gt;-->
+    <!--    </LinearLayout>-->
 
 
-    </LinearLayout>
+</LinearLayout>

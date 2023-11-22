@@ -6,6 +6,9 @@ import android.os.CountDownTimer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class ManHinhChaoActivity extends AppCompatActivity {
 
     @Override
@@ -21,11 +24,23 @@ public class ManHinhChaoActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Intent i = new Intent(ManHinhChaoActivity.this, DangNhapActivity.class);
-                startActivity(i);
-                finish();
+                nextActivity();
             }
         };
         timer.start();
+    }
+
+    private void nextActivity() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user == null) {
+            //Chua Login
+            Intent i = new Intent(this, DangNhapActivity.class);
+            startActivity(i);
+        } else {
+            //Da Login
+            Intent i = new Intent(this,MainActivity.class);
+            startActivity(i);
+        }
+        finish();
     }
 }

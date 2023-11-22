@@ -1,35 +1,35 @@
 package com.example.myapplication.model;
 
 public class User {
-    private int idUser, TrangThai, Role;
-    private String Email, MatKhau, HotenUser, Sdt, NgaySinh,Avatar;
+    private String idUser;
+    private String Email;
+    private String MatKhau;
+    private String HotenUser;
+    private String Sdt;
+    private int TrangThai;
+    private int Role;
+    private String Avatar;
 
     public User() {
     }
 
-    public User(String email, String matKhau) {
-        Email = email;
-        MatKhau = matKhau;
-    }
-
-    public User(int idUser, int trangThai, int role, String email, String matKhau, String hotenUser, String sdt, String ngaySinh, String avatar) {
+    public User(String idUser, String email, String matKhau, String hotenUser, String sdt, int trangThai, int role, String avatar) {
         this.idUser = idUser;
-        TrangThai = trangThai;
-        Role = role;
         Email = email;
         MatKhau = matKhau;
         HotenUser = hotenUser;
         Sdt = sdt;
-        NgaySinh = ngaySinh;
+        TrangThai = trangThai;
+        Role = role;
         Avatar = avatar;
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public User(String id, String email, String hotenUser, String sdt, String matKhau) {
+        idUser = id;
+        Email = email;
+        HotenUser = hotenUser;
+        Sdt = sdt;
+        MatKhau = matKhau;
     }
 
     public int getTrangThai() {
@@ -48,12 +48,12 @@ public class User {
         Role = role;
     }
 
-    public String getAvatar() {
-        return Avatar;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setAvatar(String avatar) {
-        Avatar = avatar;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public String getEmail() {
@@ -72,12 +72,12 @@ public class User {
         MatKhau = matKhau;
     }
 
-    public String getHoTenUser() {
+    public String getHotenUser() {
         return HotenUser;
     }
 
-    public void setHoTenUser(String hoTenUser) {
-        HotenUser = hoTenUser;
+    public void setHotenUser(String hotenUser) {
+        HotenUser = hotenUser;
     }
 
     public String getSdt() {
@@ -88,11 +88,11 @@ public class User {
         Sdt = sdt;
     }
 
-    public String getNgaySinh() {
-        return NgaySinh;
+    public String getAvatar() {
+        return Avatar;
     }
 
-    public void setNgaySinh(String ngaySinh) {
-        NgaySinh = ngaySinh;
+    public void setAvatar(String avatar) {
+        Avatar = avatar;
     }
 }

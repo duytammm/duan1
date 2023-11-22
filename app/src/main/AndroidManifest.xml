@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,57 +15,78 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
-        tools:targetApi="31">
-<<<<<<< HEAD
-=======
-
->>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
+        tools:targetApi="33">
         <activity
-            android:name=".QLTK_Activity"
-            android:exported="true" >
-
-        </activity>
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
-        <activity
-            android:name=".DangNhapActivity"
+            android:name=".SettingActivity"
             android:exported="false" />
         <activity
-<<<<<<< HEAD
-=======
-
->>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
-            android:name=".DangKyActivity"
-            android:exported="true" >
-
-        </activity>
+            android:name=".CT_Play_nhac"
+            android:exported="false" />
         <activity
-<<<<<<< HEAD
-            android:name=".MainActivity"
-            android:exported="true" >
-=======
-
-            android:name=".MainActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".ManHinhChaoActivity"
+            android:name=".TaoTaiKhoanActivity"
             android:exported="true">
->>>>>>> bf32d88f8270dbf40364b6547e0151d55d548d56
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-       <activity
+        <activity
+            android:name=".Update_User"
+            android:exported="true" />
+        <activity
+            android:name=".QLTK_Activity"
+            android:exported="true">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
             android:name=".ManHinhChaoActivity"
             android:exported="true">
 
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!--  -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".DangNhapActivity"
+            android:exported="true">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".DangKyActivity"
+            android:exported="true">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
     </application>
 

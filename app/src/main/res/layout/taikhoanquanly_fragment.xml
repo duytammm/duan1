@@ -14,27 +14,50 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="50dp">
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:cardCornerRadius="50dp">-->
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/quanly_nkh" />
-        </androidx.cardview.widget.CardView>
+        <!--            <ImageView-->
+        <!--                android:id="@+id/imgAvatar"-->
+        <!--                android:layout_width="70dp"-->
+        <!--                android:layout_height="70dp"-->
+        <!--                android:src="@drawable/quanly_nkh" />-->
+        <!--        </androidx.cardview.widget.CardView>-->
 
-        <TextView
-            android:id="@+id/tvTenND"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            android:paddingLeft="20dp"
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imgAvatar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/avatar_null"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_gravity="center"
-            android:text="Tên người dùng" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvTenND"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:paddingLeft="20dp"
+                android:text="Tên người dùng" />
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:paddingLeft="20dp"
+                android:text="Tên người dùng" />
+        </LinearLayout>
     </LinearLayout>
 
 
