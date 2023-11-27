@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ public class DangNhapActivity extends AppCompatActivity {
 
     private EditText edtTenDN, edtMatKhau;
     private ProgressDialog dialog;
+    SharedPreferences userPreferences;
     FirebaseAuth mAuth ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,9 +115,21 @@ public class DangNhapActivity extends AppCompatActivity {
                         String mail = user.getEmail();
                         String pass = user.getMatKhau();
                         if(mail.equals(email) && pass.equals(password)) {
+                            userPreferences = getSharedPreferences("DataUser",MODE_PRIVATE);
+                            SharedPreferences.Editor edtUser = userPreferences.edit();
+                            edtUser.putString("email",email);
+                            edtUser.apply();
                             DN(email,password);
                             return;
                         }
+//                        if(!mail.equals(email)) {
+//                            Toast.makeText(DangNhapActivity.this, "Mail không tồn tại hoặc sai email!", Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+//                        if(!pass.equals(password)) {
+//                            Toast.makeText(DangNhapActivity.this, "Sai mật khẩu!", Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
                     }
                 } else {
                     Toast.makeText(DangNhapActivity.this, "Tài khoản không tồn tại!", Toast.LENGTH_SHORT).show();
@@ -129,17 +143,5 @@ public class DangNhapActivity extends AppCompatActivity {
             }
         });
 
-//        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(task -> {
-//                    dialog.dismiss();
-//                    if (task.isSuccessful()) {
-//
-//                    } else {
-//                        // Xử lý lỗi đăng nhập
-//                        Exception exception = task.getException();
-//                        // Hiển thị thông báo lỗi hoặc xử lý khác tùy theo yêu cầu
-//                        Toast.makeText(this, "Lỗi: " + exception, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
     }
 }

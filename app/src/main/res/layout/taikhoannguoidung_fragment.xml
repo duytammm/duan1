@@ -20,21 +20,37 @@
             app:cardCornerRadius="50dp">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imgAvatar"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/nguoidung_tdt" />
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/tvTenND"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            android:paddingLeft="20dp"
             android:layout_gravity="center"
-            android:text="Tên người dùng" />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvTenND"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:paddingLeft="20dp"
+                android:layout_gravity="center"
+                android:text="Tên người dùng" />
+
+            <TextView
+                android:id="@+id/tvMail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:paddingLeft="20dp"
+                android:layout_gravity="center"
+                android:text="Tên người dùng" />
+        </LinearLayout>
     </LinearLayout>
 
     <androidx.cardview.widget.CardView

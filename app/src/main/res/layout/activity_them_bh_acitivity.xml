@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ThemBH_Acitivity"
+    android:background="#D0E1F9">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="THÊM BÀI HÁT"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_marginLeft="30dp"
+                android:textSize="22dp"
+                android:layout_gravity="center"/>
+        </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgBiaBH"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/quanly_addsong"
+            android:layout_gravity="center"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@drawable/custom_spinner_update"
+            android:hint="Tên bài hát"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/thembh_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtTenBH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ca sĩ:"
+            android:textSize="20sp"/>
+
+        <LinearLayout
+            android:background="@drawable/custom_spinner_update"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/thembh_name"/>
+
+            <Spinner
+                android:id="@+id/spTenCS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/role" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Link bài hát: "
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/edtlinkbaihat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Link bài hát"
+            android:background="@drawable/custom_linkbh"
+            android:padding="10dp"
+            android:textSize="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"/>
+
+        <Button
+            android:id="@+id/btThem"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="#4D648D"
+            android:text="Thêm"
+            android:textSize="20dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</LinearLayout>

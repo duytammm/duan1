@@ -1,6 +1,9 @@
 package com.example.myapplication;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,44 +19,32 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class TK_QuanLy_fragment extends Fragment {
     final private Update_User updateUser = new Update_User();
-    public static final int MY_REQUEST_CODE = 10;
     private ImageView imgAvatar;
     private TextView tvTenND, tvEmail;
     private CardView cvQLTaiKhoan, cvTaoTK, cvQLBH, cvQLHD, cvSetting, cvDX;
-//    final private ActivityResultLauncher<Intent> mactivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-//            new ActivityResultCallback<ActivityResult>() {
-//                @Override
-//                public void onActivityResult(ActivityResult result) {
-//                    if(result.getResultCode() == RESULT_OK) {
-//                        Intent intent = result.getData();
-//                        if(intent == null) {
-//                            return;
-//                        } else {
-//                            Uri uri = intent.getData();
-//                            updateUser.setUri(uri);
-//                            try {
-//                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),uri);
-//                                updateUser.setBitmap(bitmap);
-//                            } catch (IOException e) {
-//                                Toast.makeText(getContext(), "Lỗi: " + e, Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    }
-//                }
-//            });
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Nullable
@@ -70,8 +61,7 @@ public class TK_QuanLy_fragment extends Fragment {
         tvTenND = v.findViewById(R.id.tvTenND);
         tvEmail = v.findViewById(R.id.tvEmail);
 
-        showInfo();
-
+        showInformation();
         cvQLTaiKhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,44 +113,53 @@ public class TK_QuanLy_fragment extends Fragment {
         return v;
     }
 
-    public void showInfo() {
+    public void showInformation() {
+        SharedPreferences inforSharedPreferences = getActivity().getSharedPreferences("DataUser",MODE_PRIVATE);
+        String mail = inforSharedPreferences.getString("email","");
 
-//        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user == null){
-            return;
-        }
-
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String userID = user.getUid();
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(userID);
-
-            if(name == null) {
-                tvTenND.setVisibility(View.GONE);
-            } else {
-                tvTenND.setVisibility(View.VISIBLE);
-                tvTenND.setText(name);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Avatar_User").child(mail);
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri downloadUrl) {
+                // Lay link anh
+                String imageUrl = downloadUrl.toString();
+                Toast.makeText(updateUser, "Loi: " + imageUrl, Toast.LENGTH_SHORT).show();
+                // load len
+                Glide.with(getActivity()).load(imageUrl).error(R.drawable.avatar_null).into(imgAvatar);
             }
-            tvEmail.setText(email);
-            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri downloadUrl) {
-                    // Lay link anh
-                    String imageUrl = downloadUrl.toString();
-                    Toast.makeText(updateUser, "Loi: " + imageUrl, Toast.LENGTH_SHORT).show();
-                    // load len
-                    Glide.with(getActivity()).load(imageUrl).error(R.drawable.avatar_null).into(imgAvatar);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
 
+            }
+        });
+
+        DatabaseReference inforReference = FirebaseDatabase.getInstance().getReference("USER");
+        inforReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        User user = dataSnapshot.getValue(User.class);
+                        String email = user.getEmail();
+                        String hoTen = user.getHotenUser();
+                        if(mail.equals(email)) {
+                            tvEmail.setText(email);
+                            tvTenND.setText(hoTen);
+                            return;
+                        }
+                    }
                 }
-            });
-        }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(updateUser, "Lỗi: " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
+
 
 }

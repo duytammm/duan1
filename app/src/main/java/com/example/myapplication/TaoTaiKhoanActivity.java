@@ -9,10 +9,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.myapplication.DAO.User_DAO;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class TaoTaiKhoanActivity extends AppCompatActivity {
     private Toolbar tbTTK;
@@ -75,14 +81,32 @@ public class TaoTaiKhoanActivity extends AppCompatActivity {
             rules = 3;
         }
 
-        if(Patterns.EMAIL_ADDRESS.matcher(mail).matches() && !pass.equals("") && !fullName.equals("") && !role.equals("")) {
-            dao.addUser(mail,pass,fullName,1,rules);
-            Toast.makeText(this, "Tạo tài khoản thành công", Toast.LENGTH_SHORT).show();
-            clearForm();
-        } else {
-            Toast.makeText(this, "Vui lòng nhập mail đúng định dạng abc@....", Toast.LENGTH_SHORT).show();
+        if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+            Toast.makeText(this, "Vui lòng nhập mail theo định dạng: abc@....", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        DatabaseReference userListRef = FirebaseDatabase.getInstance().getReference("USER");
+        int finalRules = rules;
+        userListRef.orderByChild("email").equalTo(mail).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // Email is already registered
+                    Toast.makeText(TaoTaiKhoanActivity.this, "Email đã tồn tại. Vui lòng chọn email khác!", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Email is not registered, proceed with the sign-up
+                    dao.addUser(mail, pass,fullName,1, finalRules);
+                    clearForm();
+                    Toast.makeText(TaoTaiKhoanActivity.this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TaoTaiKhoanActivity.this, "Lỗi: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void clearForm() {

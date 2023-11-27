@@ -9,11 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.DAO.User_DAO;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class DangKyActivity extends AppCompatActivity {
     private Button btDK, btTV;
@@ -66,99 +70,51 @@ public class DangKyActivity extends AppCompatActivity {
 
         if (mail.equals("") || pass.equals("") || rePass.equals("")) {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            return;
         }
         if (!pass.equals(rePass)) {
             Toast.makeText(this, "Vui lòng nhập 2 pass trùng nhau!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            return;
         }
-//        if(pass.length() < 6 && rePass.length() < 6) {
-//            Toast.makeText(this, "Mật khẩu ít nhất 6 kí tự!!!", Toast.LENGTH_SHORT).show();
-//        }
-
-//        FirebaseAuth mAuth;
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference reference = database.getReference("USER");
-        if (Patterns.EMAIL_ADDRESS.matcher(mail).matches() && !pass.equals("") && !rePass.equals("") && pass.equals(rePass)) {
-            dao.registerUser(mail, pass);
-            startActivity(new Intent(DangKyActivity.this, DangNhapActivity.class));
-            finishAffinity();
-            Toast.makeText(DangKyActivity.this, "Register success", Toast.LENGTH_SHORT).show();
-//        mAuth.createUserWithEmailAndPassword(mail, pass)
-//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        dialog.dismiss();
-//                        if (task.isSuccessful()) {
-//                            dialog.dismiss();
-//                            dao.registerUser(mail, pass);
-//                            startActivity(new Intent(DangKyActivity.this, DangNhapActivity.class));
-//                            finishAffinity();
-//                            Toast.makeText(DangKyActivity.this, "Register success", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(DangKyActivity.this, "Register failed", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-        } else {
-            Toast.makeText(this, "Vui lòng nhập mail theo định dạng: abc@....", Toast.LENGTH_SHORT).show();
+        if (pass.length() < 6 && rePass.length() < 6) {
+            Toast.makeText(this, "Mật khẩu ít nhất 6 kí tự!!!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
             return;
         }
 
+        if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+            Toast.makeText(this, "Vui lòng nhập mail theo định dạng: abc@....", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            return;
+        }
+
+        DatabaseReference userListRef = FirebaseDatabase.getInstance().getReference("USER");
+        userListRef.orderByChild("email").equalTo(mail).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dialog.dismiss();
+                if (snapshot.exists()) {
+                    // Email is already registered
+                    Toast.makeText(DangKyActivity.this, "Email đã tồn tại. Vui lòng chọn email khác!", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Email is not registered, proceed with the sign-up
+                    dao.registerUser(mail, pass);
+                    startActivity(new Intent(DangKyActivity.this, DangNhapActivity.class));
+                    finishAffinity();
+                    Toast.makeText(DangKyActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                dialog.dismiss();
+                Toast.makeText(DangKyActivity.this, "Lỗi: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
 }
 
-//    private void signUp() {
-//        dialog.show();
-//        mAuth=FirebaseAuth.getInstance();
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference reference = database.getReference("USER");
-//
-//        String email = edtTenDK.getText().toString().trim();
-//        String password = edtMatKhau.getText().toString().trim();
-//        String repassword = edNLMatKhau.getText().toString().trim();
-//        //Tao userID cho moi nguoi dung duoc them vao
-//        String userID = reference.push().getKey();
-//
-//        if (TextUtils.isEmpty(email)){
-//            Toast.makeText(DangKyActivity.this, "Nhap username", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        if (TextUtils.isEmpty(password)){
-//            Toast.makeText(DangKyActivity.this, "Nhap password", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        if (TextUtils.isEmpty(repassword)){
-//            Toast.makeText(DangKyActivity.this, "Nhap lai password", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        if(!password.equals(repassword)) {
-//            Toast.makeText(this, "Pass khong trung nhau, vui long nhap lai", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        if(password.length() < 6 || repassword.length() < 6) {
-//            Toast.makeText(this, "Vui long nhap mat khau it nhat 6 kitu bao gom chu va so", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        if(!email.equals("") && !password.equals("") &&  !repassword.equals("") && password.equals(repassword)) {
-//            mAuth.createUserWithEmailAndPassword(email,password)
-//                    .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            dialog.dismiss();
-////                            User user = new User(email,password,3,1);
-////                            reference.child(userID).setValue(user);
-//                            if (task.isSuccessful()) {
-//                                Toast.makeText(DangKyActivity.this, "Dang ky thanh cong",
-//                                        Toast.LENGTH_SHORT).show();
-//                                Intent i=new Intent(DangKyActivity.this, DangNhapActivity.class);
-//                                startActivity(i);
-//                                finish();
-//                            } else {
-//                                Toast.makeText(DangKyActivity.this, "Dang ky that bai", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-//        } else {
-//            Toast.makeText(this, "Dang ky that bai", Toast.LENGTH_SHORT).show();
-//        }
-//    }
