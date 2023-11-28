@@ -23,12 +23,14 @@ import com.example.myapplication.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 
 public class TK_QuanLy_fragment extends Fragment {
@@ -62,6 +64,27 @@ public class TK_QuanLy_fragment extends Fragment {
         tvEmail = v.findViewById(R.id.tvEmail);
 
         showInformation();
+
+        SharedPreferences inforSharedPreferences = getActivity().getSharedPreferences("DataUser",MODE_PRIVATE);
+        String mail = inforSharedPreferences.getString("email","");
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Avatar_User").child(mail);
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri downloadUrl) {
+                // Lay link anh
+                String imageUrl = downloadUrl.toString();
+                Toast.makeText(getActivity(), "Loi: " + imageUrl, Toast.LENGTH_SHORT).show();
+                // load len
+                Glide.with(getActivity()).load(imageUrl).error(R.drawable.avatar_null).into(imgAvatar);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+
+            }
+        });
+
         cvQLTaiKhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,23 +140,6 @@ public class TK_QuanLy_fragment extends Fragment {
         SharedPreferences inforSharedPreferences = getActivity().getSharedPreferences("DataUser",MODE_PRIVATE);
         String mail = inforSharedPreferences.getString("email","");
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Avatar_User").child(mail);
-        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri downloadUrl) {
-                // Lay link anh
-                String imageUrl = downloadUrl.toString();
-                Toast.makeText(updateUser, "Loi: " + imageUrl, Toast.LENGTH_SHORT).show();
-                // load len
-                Glide.with(getActivity()).load(imageUrl).error(R.drawable.avatar_null).into(imgAvatar);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-
-            }
-        });
-
         DatabaseReference inforReference = FirebaseDatabase.getInstance().getReference("USER");
         inforReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -151,7 +157,6 @@ public class TK_QuanLy_fragment extends Fragment {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(updateUser, "Lỗi: " + error, Toast.LENGTH_SHORT).show();
@@ -159,6 +164,75 @@ public class TK_QuanLy_fragment extends Fragment {
         });
     }
 
+    public void showInfo() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return;
+        }
+
+        if (user != null) {
+            String userID = user.getUid();
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Avatar_User").child(userID);
+
+            if (name == null) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvTenND.setVisibility(View.GONE);
+                    }
+                });
+            } else {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvTenND.setVisibility(View.VISIBLE);
+                        tvTenND.setText(name);
+                    }
+                });
+            }
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvEmail.setText(email);
+                }
+            });
+
+            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri downloadUrl) {
+                    String imageUrl = downloadUrl.toString();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Glide.with(getActivity()).load(imageUrl).error(R.drawable.avatar_null).into(imgAvatar);
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "Failed to retrieve download URL: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    if (exception instanceof StorageException && ((StorageException) exception).getErrorCode() == StorageException.ERROR_OBJECT_NOT_FOUND) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Glide.with(getActivity()).load(R.drawable.avatar_null).into(imgAvatar);
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    }
 
 
 

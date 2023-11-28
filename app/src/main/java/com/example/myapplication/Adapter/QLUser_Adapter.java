@@ -120,6 +120,7 @@ public class QLUser_Adapter extends RecyclerView.Adapter<QLUser_Adapter.ViewHold
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         alertDialog.show();
 
+        ImageView imgAvatar = v.findViewById(R.id.imgAvatar);
         EditText edtMail = v.findViewById(R.id.edtEmail);
         EditText edtPass = v.findViewById(R.id.edtPass);
         EditText edtFullName = v.findViewById(R.id.edtFullName);
@@ -129,6 +130,8 @@ public class QLUser_Adapter extends RecyclerView.Adapter<QLUser_Adapter.ViewHold
         Button btUpdate = v.findViewById(R.id.btUpdate);
         Button btHuy = v.findViewById(R.id.btHuy);
 
+        Glide.with(c).load(Uri.parse(user.getAvatar())).error(R.drawable.avatar_null)
+                .into(imgAvatar);
         edtMail.setText(user.getEmail());
         edtPass.setText(user.getMatKhau());
         edtFullName.setText(user.getHotenUser());

@@ -52,12 +52,6 @@ public class QLTK_Activity extends AppCompatActivity {
 
         lstUser = new ArrayList<>();
 
-//        adapter = new QLUser_Adapter(this,lstUser);
-//        LinearLayoutManager manager = new LinearLayoutManager(this);
-//        rcvQLTK.setLayoutManager(manager);
-//        rcvQLTK.setAdapter(adapter);
-//        getListUser();
-
     }
 
     @Override
@@ -86,27 +80,5 @@ public class QLTK_Activity extends AppCompatActivity {
     }
 
 
-//    private void getListUser(){
-//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//        DatabaseReference reference = firebaseDatabase.getReference("USER");
-//
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            // trả về tổng bên ngoài DataSnapshot snapshot
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                    User user = dataSnapshot.getValue(User.class);
-//                    lstUser.add(user);
-//                }
-//
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(QLTK_Activity.this, "Lấy danh sách thất bại", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 
 }

@@ -3,6 +3,8 @@ package com.example.myapplication.DAO;
 import androidx.annotation.NonNull;
 
 import com.example.myapplication.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,43 +23,12 @@ public class User_DAO {
         lstUser = new ArrayList<>();
     }
 
+    public interface ongetListCS {
+        void ongetSuccess(List<User> lstCS);
+    }
+
     //LẤY TẤT CẢ THÔNG TIN USER
     public List<User> getUserList() {
-//        DatabaseReference userListRef = mDatabase.child("USER");
-//        userListRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-//                    String idUser = userSnapshot.getKey();
-//                    int trangThai = userSnapshot.child("TrangThai").getValue(Integer.class);
-//                    int role = userSnapshot.child("Role").getValue(Integer.class);
-//                    String email = userSnapshot.child("Email").getValue(String.class);
-//                    String matKhau = userSnapshot.child("MatKhau").getValue(String.class);
-//                    String hoTenUser = userSnapshot.child("HotenUser").getValue(String.class);
-//                    String sdt = userSnapshot.child("Sdt").getValue(String.class);
-//                    String ngaySinh = userSnapshot.child("NgaySinh").getValue(String.class);
-//                    String avatar = userSnapshot.child("Avatar").getValue(String.class);
-//
-//                    User user = new User();
-//                    user.setIdUser(idUser);
-//                    user.setTrangThai(trangThai);
-//                    user.setRole(role);
-//                    user.setEmail(email);
-//                    user.setMatKhau(matKhau);
-//                    user.setHoTenUser(hoTenUser);
-//                    user.setSdt(sdt);
-//                    user.setNgaySinh(ngaySinh);
-//                    user.setAvatar(avatar);
-//
-//                    lstUser.add(user);
-//                }
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                // Xảy ra lỗi khi truy vấn database
-//            }
-//        });
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference = firebaseDatabase.getReference("USER");
         reference.addValueEventListener(new ValueEventListener() {
@@ -76,6 +47,25 @@ public class User_DAO {
         return lstUser;
     }
 
+    //Get list user co role=2
+    public void getLstCS(ongetListCS lst) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference reference = firebaseDatabase.getReference("USER");
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                List<User> lstCS = new ArrayList<>();
+                for(DataSnapshot dataSnapshot : task.getResult().getChildren()){
+                    User user = dataSnapshot.getValue(User.class);
+                    if(user.getRole() == 2) {
+                        lstCS.add(user);
+                    }
+                }
+                lst.ongetSuccess(lstCS);
+            }
+        });
+    }
+
     //ĐĂNG KÝ
     public void registerUser(String email, String password) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -83,11 +73,6 @@ public class User_DAO {
 
         String id = reference.push().getKey();
         User user = new User(id,email,password,"","",1,1,"");
-//        HashMap hashMap = new HashMap();
-//        hashMap.put("email",email);
-//        hashMap.put("matkhau",password);
-//        hashMap.put("trangthai",1);
-//        hashMap.put("role",1);
         reference.child(id).setValue(user);
     }
 

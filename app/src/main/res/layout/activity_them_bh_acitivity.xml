@@ -14,25 +14,17 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tb"
+            android:id="@+id/tbThemBH"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="#000"
+            app:titleTextColor="#fff"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="THÊM BÀI HÁT"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:layout_marginLeft="30dp"
-                android:textSize="22dp"
-                android:layout_gravity="center"/>
         </androidx.appcompat.widget.Toolbar>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="50dp"
         android:padding="10dp"
         android:layout_gravity="center"
         android:layout_width="match_parent"
@@ -43,6 +35,7 @@
             android:id="@+id/imgBiaBH"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:scaleType="centerCrop"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="20dp"
             android:src="@drawable/quanly_addsong"
@@ -80,7 +73,6 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_marginLeft="5dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/thembh_name"/>
@@ -88,8 +80,7 @@
             <Spinner
                 android:id="@+id/spTenCS"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/role" />
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
@@ -100,18 +91,31 @@
             android:text="Link bài hát: "
             android:textSize="20sp"/>
 
-        <EditText
-            android:id="@+id/edtlinkbaihat"
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:background="@drawable/custom_linkbh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="Link bài hát"
-            android:background="@drawable/custom_linkbh"
-            android:padding="10dp"
-            android:textSize="25dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="5dp"/>
+            android:padding="2dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/thembh_link"/>
+
+            <EditText
+                android:id="@+id/edtLinkBH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Link bài hát"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btThem"
