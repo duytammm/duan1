@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 //                        }
 //                    });
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.framLayout, new TK_QuanLy_fragment())
+                            .replace(R.id.framLayout, new TK_NgheSi_Fragment())
                             .commit();
 
                 }

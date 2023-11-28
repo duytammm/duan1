@@ -7,22 +7,19 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:padding="20dp"
+        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="50dp">
-
-            <ImageView
-                android:id="@+id/imgAvatar"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/avatar" />
-        </androidx.cardview.widget.CardView>
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imgAvatar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/avatar_null"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -58,7 +55,7 @@
         android:gravity="center"
         android:textColor="#fff"
         android:textSize="25dp"
-        android:padding="10dp"
+        android:padding="5dp"
         android:layout_margin="10dp"
         android:background="#000000"
         android:textStyle="bold"
@@ -66,7 +63,7 @@
 
     <LinearLayout
         android:id="@+id/linearXem"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
@@ -77,14 +74,14 @@
         <ImageView
             android:paddingLeft="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:src="@drawable/nghesi_xem" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:paddingLeft="10dp"
             android:layout_gravity="center"
@@ -104,14 +101,14 @@
         <ImageView
             android:paddingLeft="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:src="@drawable/nghesi_them" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:paddingLeft="10dp"
             android:layout_gravity="center"
@@ -129,16 +126,16 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:paddingLeft="25dp"
+            android:paddingLeft="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:src="@drawable/nghesi_history" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:paddingLeft="10dp"
             android:layout_gravity="center"
@@ -158,14 +155,14 @@
         <ImageView
             android:paddingLeft="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:src="@drawable/nghesi_sua" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:paddingLeft="10dp"
             android:layout_gravity="center"
@@ -179,7 +176,7 @@
         android:textColor="#fff"
         android:textSize="25dp"
         android:textStyle="bold"
-        android:padding="10dp"
+        android:padding="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -192,23 +189,21 @@
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
         android:layout_height="wrap_content"
         android:background="#39496B"
         android:orientation="horizontal">
 
         <ImageView
-            android:paddingLeft="10dp"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
             android:src="@drawable/nghesi_setting" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:paddingLeft="10dp"
             android:layout_gravity="center"
@@ -231,14 +226,14 @@
         <ImageView
             android:paddingLeft="10dp"
             android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:src="@drawable/nghesi_logout" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:paddingLeft="10dp"
             android:layout_gravity="center"

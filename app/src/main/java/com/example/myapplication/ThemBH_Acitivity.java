@@ -291,10 +291,10 @@ public class ThemBH_Acitivity extends AppCompatActivity {
                                                             int idBH = finalNextIdBaiHat;
                                                             newBaiHat.setIdBaiHat(idBH);
                                                             newBH.setValue(newBaiHat);
-                                                            Toast.makeText(ThemBH_Acitivity.this, "Bài hát đã được tải lên thành công", Toast.LENGTH_SHORT).show();
 
                                                             // Đảm bảo progressDialog.dismiss() chỉ được gọi khi toàn bộ quá trình đã hoàn tất
                                                             progressDialog.dismiss();
+                                                            Toast.makeText(ThemBH_Acitivity.this, "Bài hát đã được thêm thành công", Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 });
