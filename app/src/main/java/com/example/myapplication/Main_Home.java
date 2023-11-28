@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,45 @@ public class Main_Home extends Fragment {
     private ViewPager viewPager;
     private CircleIndicator cirCle;
     private List<SlideShow> lst;
+    private final int AUTO_SCROLL_DELAY = 3000; // Thời gian chuyển đổi giữa các trang (3 giây)
+    private Handler handler;
+    private Runnable runnable;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        startAutoSlider();
+    }
+
+    @Override
+    public void onPause() {
+        stopAutoSlider();
+        super.onPause();
+    }
+
+    private void startAutoSlider() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            public void run() {
+                int currentItem = viewPager.getCurrentItem();
+                int totalItems = viewPager.getAdapter() != null ? viewPager.getAdapter().getCount() : 0;
+                if (currentItem < totalItems - 1) {
+                    viewPager.setCurrentItem(currentItem + 1);
+                } else {
+                    viewPager.setCurrentItem(0);
+                }
+                handler.postDelayed(this, AUTO_SCROLL_DELAY);
+            }
+        };
+        handler.postDelayed(runnable, AUTO_SCROLL_DELAY);
+    }
+
+    private void stopAutoSlider() {
+        if (handler != null && runnable != null) {
+            handler.removeCallbacks(runnable);
+        }
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

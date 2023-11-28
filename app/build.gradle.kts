@@ -58,5 +58,8 @@ dependencies {
     // Circle Image
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
+    //Firebase UI
+    implementation ("com.firebaseui:firebase-ui-auth:8.0.2")
+
 
 }
