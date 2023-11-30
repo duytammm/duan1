@@ -4,6 +4,8 @@ public class PlayList {
     private int idPlayList;
     private String TenPlayList, BiaPlayList;
 
+    public PlayList() {}
+
     public PlayList(int idPlayList, String tenPlayList, String biaPlayList) {
         this.idPlayList = idPlayList;
         TenPlayList = tenPlayList;
