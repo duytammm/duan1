@@ -58,7 +58,7 @@ public class DangKyActivity extends AppCompatActivity {
         dialog = new ProgressDialog(this);
         dialog.setTitle("Alert");
         dialog.setMessage("Đang tải. Vui lòng chờ trong giây lát...");
-        dao = new User_DAO();
+        dao = new User_DAO(this);
 
     }
 

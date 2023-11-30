@@ -1,5 +1,11 @@
 package com.example.myapplication.DAO;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 
 import com.example.myapplication.model.User;
@@ -17,9 +23,11 @@ import java.util.List;
 public class User_DAO {
     private DatabaseReference databaseReference;
     private List<User> lstUser;
-    public User_DAO() {
+    private Context c;
+    public User_DAO(Context c) {
         // Khởi tạo Firebase Realtime Database
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        this.c = c;
         lstUser = new ArrayList<>();
     }
 
@@ -85,4 +93,46 @@ public class User_DAO {
         User newUser = new User(id,mail,pass,fullName,"",status,role,"");
         reference.child(id).setValue(newUser);
     }
+
+    //THAY THẾ KÍ TỰ TRONG MAIL
+    public String replace(String email) {
+        // Thay thế các ký tự không hợp lệ trong email
+        return email.replace('.', '_')
+                .replace('#', '_')
+                .replace('$', '_')
+                .replace('[', '_')
+                .replace(']', '_');
+    }
+
+    public interface OnRoleReceivedListener {
+        void onRoleReceived(int role);
+    }
+
+    public void getCurrentUserRole(OnRoleReceivedListener listener) {
+        SharedPreferences inforSharedPreferences = c.getSharedPreferences("DataUser", MODE_PRIVATE);
+        String mail = inforSharedPreferences.getString("email", "");
+        String Mail = replace(mail);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference userReference = database.getReference("USER");
+        DatabaseReference currentUserReference = userReference.child(Mail);
+
+        currentUserReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int role = 0;
+                if (dataSnapshot.exists()) {
+                    role = dataSnapshot.child("role").getValue(Integer.class);
+                }
+                listener.onRoleReceived(role);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Xử lý lỗi khi truy vấn bị hủy
+                Toast.makeText(c, "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

@@ -107,7 +107,7 @@ public class ThemBH_Acitivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_bh_acitivity);
         initView();
-        userDao = new User_DAO();
+        userDao = new User_DAO(this);
         setSpinner();
 
         setSupportActionBar(tbThemBH);

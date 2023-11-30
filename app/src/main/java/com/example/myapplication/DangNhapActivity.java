@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class DangNhapActivity extends AppCompatActivity {
-
     private EditText edtTenDN, edtMatKhau;
     private ProgressDialog dialog;
     SharedPreferences userPreferences;
@@ -66,13 +65,34 @@ public class DangNhapActivity extends AppCompatActivity {
                         User user = userSnapshot.getValue(User.class);
                         if(user.getEmail().equals(email) && user.getMatKhau().equals(password)){
                             Integer trangThaiInteger = user.getTrangThai();
+                            Integer roleInteger = user.getRole();
                             if (trangThaiInteger != null) {
                                 int trangThai = trangThaiInteger.intValue();
-//                                Toast.makeText(DangNhapActivity.this, "Trạng thái: " + trangThai, Toast.LENGTH_SHORT).show();
                                 if(trangThai == 1 ){
-                                    startActivity(new Intent(DangNhapActivity.this, MainActivity.class));
-                                    finishAffinity();
-                                    Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công!!!", Toast.LENGTH_SHORT).show();
+                                    if(roleInteger != null) {
+                                        int role = roleInteger.intValue();
+                                        switch (role){
+                                            case 1: {
+                                                startActivity(new Intent(DangNhapActivity.this, MainActivity_NguoiDung.class));
+                                                finishAffinity();
+                                                Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công!!!", Toast.LENGTH_SHORT).show();
+                                                break;
+                                            }
+                                            case 2: {
+                                                startActivity(new Intent(DangNhapActivity.this, MainActivity_NgheSi.class));
+                                                finishAffinity();
+                                                Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công!!!", Toast.LENGTH_SHORT).show();
+                                                break;
+                                            }
+                                            case 3: {
+                                                startActivity(new Intent(DangNhapActivity.this, MainActivity_QuanLy.class));
+                                                finishAffinity();
+                                                Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công!!!", Toast.LENGTH_SHORT).show();
+                                                break;
+                                            }
+                                        }
+                                    }
+
                                 }
                                 if(trangThai == 0) {
                                     Toast.makeText(DangNhapActivity.this, "Tài khoản bị khóa tạm thời do vi phạm nội quy cộng đồng", Toast.LENGTH_SHORT).show();
@@ -110,26 +130,25 @@ public class DangNhapActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dialog.dismiss();
                 if(snapshot.exists()) {
+                    boolean isUserFound = false;
                     for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         User user = dataSnapshot.getValue(User.class);
-                        String mail = user.getEmail();
-                        String pass = user.getMatKhau();
-                        if(mail.equals(email) && pass.equals(password)) {
-                            userPreferences = getSharedPreferences("DataUser",MODE_PRIVATE);
-                            SharedPreferences.Editor edtUser = userPreferences.edit();
-                            edtUser.putString("email",email);
-                            edtUser.apply();
-                            DN(email,password);
-                            return;
+                        if (user != null && user.getEmail() != null && user.getMatKhau() != null) {
+                            String mail = user.getEmail();
+                            String pass = user.getMatKhau();
+                            if(mail.equals(email) && pass.equals(password)) {
+                                isUserFound = true;
+                                userPreferences = getSharedPreferences("DataUser",MODE_PRIVATE);
+                                SharedPreferences.Editor edtUser = userPreferences.edit();
+                                edtUser.putString("email",email);
+                                edtUser.apply();
+                                DN(email,password);
+                                return;
+                            }
                         }
-//                        if(!mail.equals(email)) {
-//                            Toast.makeText(DangNhapActivity.this, "Mail không tồn tại hoặc sai email!", Toast.LENGTH_SHORT).show();
-//                            return;
-//                        }
-//                        if(!pass.equals(password)) {
-//                            Toast.makeText(DangNhapActivity.this, "Sai mật khẩu!", Toast.LENGTH_SHORT).show();
-//                            return;
-//                        }
+                    }
+                    if (!isUserFound) {
+                        Toast.makeText(DangNhapActivity.this, "Sai mật khẩu hoặc email. Vui lòng thử lại!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(DangNhapActivity.this, "Tài khoản không tồn tại!", Toast.LENGTH_SHORT).show();
@@ -139,9 +158,10 @@ public class DangNhapActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(DangNhapActivity.this, "Lỗi: " + error, Toast.LENGTH_SHORT).show();
             }
         });
 
     }
+
 }

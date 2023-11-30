@@ -4,6 +4,12 @@ public class PlayList {
     private int idPlayList;
     private String TenPlayList, BiaPlayList;
 
+    public PlayList(int idPlayList, String tenPlayList, String biaPlayList) {
+        this.idPlayList = idPlayList;
+        TenPlayList = tenPlayList;
+        BiaPlayList = biaPlayList;
+    }
+
     public int getIdPlayList() {
         return idPlayList;
     }

@@ -57,7 +57,7 @@ public class TaoTaiKhoanActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
         getSupportActionBar().setTitle("Tạo tài khoản");
 
-        dao = new User_DAO();
+        dao = new User_DAO(this);
 
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
