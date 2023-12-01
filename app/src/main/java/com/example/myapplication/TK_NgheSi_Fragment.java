@@ -111,8 +111,21 @@ public class TK_NgheSi_Fragment extends Fragment {
                 startActivity(new Intent(getActivity(), ThemBH_Acitivity.class));
             }
         });
+        linearXem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                startActivity(new Intent(getActivity(), XemBH_Activity.class));
+            }
+        });
+
+        linearLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), DangNhapActivity.class);
+                startActivity(i);
+                getActivity().finishAffinity();
+            }
+        });
     }
-
-
 
 }

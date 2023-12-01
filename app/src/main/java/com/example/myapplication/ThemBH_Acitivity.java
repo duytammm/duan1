@@ -106,6 +106,7 @@ public class ThemBH_Acitivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 uploadBaiHat();
+                clearFrom();
             }
         });
     }
@@ -205,7 +206,6 @@ public class ThemBH_Acitivity extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences("DataID",MODE_PRIVATE);
             String tenCS = sharedPreferences.getString("hoten","");
             newBaiHat.setTenCaSi(tenCS);
-            Toast.makeText(this, "tenCS", Toast.LENGTH_SHORT).show();
 
             //Lấy id
             FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -391,5 +391,10 @@ public class ThemBH_Acitivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void clearFrom() {
+        edtTenBH.setText("");
+        edtLinkBH.setText("");
     }
 }

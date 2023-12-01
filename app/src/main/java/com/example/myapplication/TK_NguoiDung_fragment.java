@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -53,6 +54,15 @@ public class TK_NguoiDung_fragment extends Fragment {
         imgAvatar = v.findViewById(R.id.imgAvatar);
 
         showInformation();
+
+        cvDangXuat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), DangNhapActivity.class);
+                startActivity(i);
+                getActivity().finishAffinity();
+            }
+        });
 
         return v;
     }
