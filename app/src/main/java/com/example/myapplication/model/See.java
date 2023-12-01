@@ -5,6 +5,8 @@ public class See {
     private String idSee;
     private int idBH;
 
+    public See(){}
+
     public See(String idUser, String idSee, int idBH) {
         this.idUser = idUser;
         this.idSee = idSee;

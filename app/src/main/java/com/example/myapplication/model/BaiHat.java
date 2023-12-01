@@ -1,7 +1,16 @@
 package com.example.myapplication.model;
 
 public class BaiHat {
-    private int idBaiHat;
+    private int idBaiHat, stt;
+
+    public int getStt() {
+        return stt;
+    }
+
+    public void setStt(int stt) {
+        this.stt = stt;
+    }
+
     private String TenCaSi, TenBH, BiaBH, linkBH;
 
     public String getLinkBH() {
