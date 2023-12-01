@@ -149,7 +149,7 @@ public class ThemBH_Acitivity extends AppCompatActivity {
         if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             openGallery();
         } else {
-            String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
             requestPermissions(permission,MY_REQUEST_CODE);
         }
     }
