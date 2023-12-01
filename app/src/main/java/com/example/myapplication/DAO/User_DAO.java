@@ -74,13 +74,14 @@ public class User_DAO {
         });
     }
 
+
     //ĐĂNG KÝ
-    public void registerUser(String email, String password) {
+    public void registerUser(String email, String password,String hoten) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("USER");
 
         String id = reference.push().getKey();
-        User user = new User(id,email,password,"","",1,1,"");
+        User user = new User(id,email,password,hoten,"",1,1,"");
         reference.child(id).setValue(user);
     }
 

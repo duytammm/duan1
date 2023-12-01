@@ -1,15 +1,18 @@
 package com.example.myapplication.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
 import com.example.myapplication.model.PlayList;
 
@@ -35,8 +38,18 @@ public class TK_PlayList_Adapter extends RecyclerView.Adapter<TK_PlayList_Adapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PlayList playList = lstPL.get(position);
-
         holder.tvTieuDe.setText(playList.getTenPlayList());
+        if(playList.getBiaPlayList() != null){
+            Glide.with(c).load(Uri.parse(playList.getBiaPlayList())).error(R.drawable.avatar_null).into(holder.imgPlaylist);
+        } else {
+            Glide.with(c).load(R.drawable.avatar_null).into(holder.imgPlaylist);
+        }
+        holder.rltPL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
@@ -48,7 +61,7 @@ public class TK_PlayList_Adapter extends RecyclerView.Adapter<TK_PlayList_Adapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
+        private RelativeLayout rltPL;
         private ImageView imgPlaylist;
         private TextView tvTieuDe;
 
@@ -56,6 +69,7 @@ public class TK_PlayList_Adapter extends RecyclerView.Adapter<TK_PlayList_Adapte
             super(itemView);
             imgPlaylist = itemView.findViewById(R.id.imgPlaylist);
             tvTieuDe = itemView.findViewById(R.id.tvTieuDe);
+            rltPL = itemView.findViewById(R.id.rltPL);
         }
     }
 }

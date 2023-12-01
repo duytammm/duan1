@@ -6,6 +6,7 @@ import static com.example.myapplication.Update_User.MY_REQUEST_CODE;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -15,8 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
-import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -29,7 +29,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.DAO.User_DAO;
 import com.example.myapplication.model.BaiHat;
-import com.example.myapplication.model.User;
+import com.example.myapplication.model.See;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,8 +41,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ThemBH_Acitivity extends AppCompatActivity {
@@ -50,7 +52,7 @@ public class ThemBH_Acitivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 71;
     private ImageView imgBiaBH;
     private EditText edtTenBH,edtLinkBH;
-    private Spinner spTenCS;
+    private TextView tvHoTen;
     private Button btThem;
     private Toolbar tbThemBH;
     private Uri audioUri, imgUri;
@@ -58,39 +60,9 @@ public class ThemBH_Acitivity extends AppCompatActivity {
         imgBiaBH = findViewById(R.id.imgBiaBH);
         edtTenBH = findViewById(R.id.edtTenBH);
         edtLinkBH = findViewById(R.id.edtLinkBH);
-        spTenCS = findViewById(R.id.spTenCS);
         btThem = findViewById(R.id.btThem);
+        tvHoTen = findViewById(R.id.tvHoTen);
         tbThemBH = findViewById(R.id.tbThemBH);
-    }
-    private void setSpinner() {
-        final SimpleAdapter[] simpleAdapter = new SimpleAdapter[1];
-        userDao.getLstCS(new User_DAO.ongetListCS() {
-            @Override
-            public void ongetSuccess(List<User> lstCS) {
-                List<HashMap<String,Object>> lstHm = new ArrayList<>();
-
-                for(User user : lstCS) {
-                    HashMap<String,Object> hm = new HashMap<>();
-                    hm.put("id",user.getIdUser());
-                    hm.put("mail",user.getEmail());
-                    hm.put("mk",user.getMatKhau());
-                    hm.put("hoten",user.getHotenUser());
-                    hm.put("trangthai",user.getTrangThai());
-                    hm.put("role",user.getRole());
-                    hm.put("avatar",user.getAvatar());
-                    lstHm.add(hm);
-                }
-                simpleAdapter[0] = new SimpleAdapter(
-                        ThemBH_Acitivity.this,
-                        lstHm,
-                        R.layout.sp_tencasi,
-                        new String[]{"hoten"},
-                        new int[]{R.id.tvTenCS}
-                );
-                spTenCS.setAdapter(simpleAdapter[0]);
-
-            }
-        });
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -108,7 +80,10 @@ public class ThemBH_Acitivity extends AppCompatActivity {
         setContentView(R.layout.activity_them_bh_acitivity);
         initView();
         userDao = new User_DAO(this);
-        setSpinner();
+//        setSpinner();
+        SharedPreferences sharedPreferences = getSharedPreferences("DataID",MODE_PRIVATE);
+        String tenCS = sharedPreferences.getString("hoten","");
+        tvHoTen.setText(tenCS);
 
         setSupportActionBar(tbThemBH);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -226,9 +201,11 @@ public class ThemBH_Acitivity extends AppCompatActivity {
 
             //Lấy dữ liệu
             String tenBH = edtTenBH.getText().toString();
-            String tenCS = spTenCS.getSelectedItem().toString();
-            newBaiHat.setTenCaSi(tenCS);
             newBaiHat.setTenBH(tenBH);
+            SharedPreferences sharedPreferences = getSharedPreferences("DataID",MODE_PRIVATE);
+            String tenCS = sharedPreferences.getString("hoten","");
+            newBaiHat.setTenCaSi(tenCS);
+            Toast.makeText(this, "tenCS", Toast.LENGTH_SHORT).show();
 
             //Lấy id
             FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -236,7 +213,6 @@ public class ThemBH_Acitivity extends AppCompatActivity {
             baihatReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    progressDialog.dismiss();
                     List<BaiHat> baihatList = new ArrayList<>();
                     // Duyệt qua tất cả các nút con trong nút "baihat"
                     for (DataSnapshot baihatSnapshot : dataSnapshot.getChildren()) {
@@ -281,20 +257,33 @@ public class ThemBH_Acitivity extends AppCompatActivity {
                                                 musicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                     @Override
                                                     public void onSuccess(Uri uriaudio) {
+                                                        progressDialog.dismiss();
                                                         if (uriaudio != null) {
                                                             // Đây là đường dẫn của bài hát trên Firebase Storage
                                                             String audioUrl = uriaudio.toString();
                                                             newBaiHat.setLinkBH(audioUrl);
+
+                                                            //Lấy id user
+                                                            SharedPreferences sharedPreferences = getSharedPreferences("DataID",MODE_PRIVATE);
+                                                            String idUser = sharedPreferences.getString("id","");
+                                                            //Lưu vào bảng see
+                                                            DatabaseReference seeTableReference = FirebaseDatabase.getInstance().getReference("SEE");
+                                                            // Tạo một id duy nhất cho bảng see
+                                                            String idSee = seeTableReference.push().getKey();
+                                                            // Tạo một đối tượng SeeModel với các thông tin cần thiết
+                                                            See seeModel = new See(idUser,idSee, finalNextIdBaiHat);
+                                                            // Đặt dữ liệu vào bảng see
+                                                            seeTableReference.child(idSee).setValue(seeModel);
 
                                                             // Lưu thông tin bài hát vào Realtime Database
                                                             DatabaseReference newBH = baihatReference.child(String.valueOf(finalNextIdBaiHat));
                                                             int idBH = finalNextIdBaiHat;
                                                             newBaiHat.setIdBaiHat(idBH);
                                                             newBH.setValue(newBaiHat);
+                                                            Toast.makeText(ThemBH_Acitivity.this, "Bài hát đã được tải lên thành công", Toast.LENGTH_SHORT).show();
 
                                                             // Đảm bảo progressDialog.dismiss() chỉ được gọi khi toàn bộ quá trình đã hoàn tất
                                                             progressDialog.dismiss();
-                                                            Toast.makeText(ThemBH_Acitivity.this, "Bài hát đã được thêm thành công", Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 });
@@ -314,4 +303,93 @@ public class ThemBH_Acitivity extends AppCompatActivity {
         }
     }
 
+    private void uploadAudioToFirebaseStorage() {
+        final String[] mUri = {""};
+        BaiHat newBH = new BaiHat();
+        if (audioUri != null) {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Đang thêm...");
+            progressDialog.show();
+
+            //Lấy dữ liệu
+            String tenBH = edtTenBH.getText().toString();
+            newBH.setTenBH(tenBH);
+
+            //Lấy id
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference baihatReference = database.getReference("BAIHAT");
+            baihatReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    progressDialog.dismiss();
+                    List<BaiHat> baihatList = new ArrayList<>();
+                    // Duyệt qua tất cả các nút con trong nút "baihat"
+                    for (DataSnapshot baihatSnapshot : dataSnapshot.getChildren()) {
+                        // Lấy giá trị của nút con hiện tại và chuyển đổi thành đối tượng BaiHat
+                        BaiHat baihat = baihatSnapshot.getValue(BaiHat.class);
+                        baihatList.add(baihat);
+                    }
+
+                    // Tính toán giá trị id cho baihat tiếp theo
+                    int nextIdBaiHat = baihatList.size() + 1;
+
+
+                    // Tạo một tham chiếu đến Firebase Storage
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+                    // Tạo một tham chiếu con lưu nhạc, Upload bài hát lên Firebase Storage
+                    StorageReference audioReference = storageReference.child("Audio/" + nextIdBaiHat).child(String.valueOf(nextIdBaiHat));
+                    audioReference.putFile(audioUri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    // Lấy đường dẫn của bài hát sau khi đã upload
+                                    audioReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uriaudio) {
+                                            // Đây là đường dẫn của bài hát trên Firebase Storage
+                                            String audioUrl = uriaudio.toString();
+                                            newBH.setLinkBH(audioUrl);
+
+                                            //Tạo một tham chiếu con lưu ảnh và upload lên firebase
+                                            StorageReference imgReference = storageReference.child("Bia_Nhac/").child(String.valueOf(nextIdBaiHat));
+                                            imgReference.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                    imgReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                        @Override
+                                                        public void onSuccess(Uri uri) {
+                                                            if(uri!=null) {
+                                                                mUri[0] = uri.toString();
+                                                                newBH.setBiaBH(mUri[0]);
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+
+                                    Toast.makeText(ThemBH_Acitivity.this, "Bài hát đã được tải lên thành công", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // Xử lý lỗi khi tải lên bài hát
+                                    Toast.makeText(ThemBH_Acitivity.this, "Lỗi khi tải lên bài hát: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                    // Thực hiện tạo và thêm bài hát tiếp theo vào Firebase Realtime Database
+                    DatabaseReference newBaiHat = baihatReference.child(String.valueOf(nextIdBaiHat));
+                    newBaiHat.setValue(newBH);
+                    Toast.makeText(ThemBH_Acitivity.this, "Thêm bài hát mới thành công.", Toast.LENGTH_SHORT).show();
+                }
+                @Override
+                public void onCancelled(@androidx.annotation.NonNull DatabaseError error) {
+                    Toast.makeText(ThemBH_Acitivity.this, "Lỗi: " + error, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
 }

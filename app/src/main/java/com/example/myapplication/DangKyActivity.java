@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DangKyActivity extends AppCompatActivity {
     private Button btDK, btTV;
-    private EditText edtMail, edtMatKhau, edNLMatKhau;
+    private EditText edtTen, edtMail, edtMatKhau, edNLMatKhau;
     private ProgressDialog dialog;
     private User_DAO dao;
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -30,6 +30,7 @@ public class DangKyActivity extends AppCompatActivity {
         btDK = findViewById(R.id.btDangKy);
         btTV = findViewById(R.id.btTroVe);
         edtMail = findViewById(R.id.edtMail);
+        edtTen = findViewById(R.id.edtTen);
         edtMatKhau = findViewById(R.id.edtMatKhau);
         edNLMatKhau = findViewById(R.id.edtNLMatKhau);
     }
@@ -65,6 +66,7 @@ public class DangKyActivity extends AppCompatActivity {
     private void signUp() {
         dialog.show();
         String mail = edtMail.getText().toString();
+        String ten = edtTen.getText().toString();
         String pass = edtMatKhau.getText().toString();
         String rePass = edNLMatKhau.getText().toString();
 
@@ -100,7 +102,7 @@ public class DangKyActivity extends AppCompatActivity {
                     Toast.makeText(DangKyActivity.this, "Email đã tồn tại. Vui lòng chọn email khác!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Email is not registered, proceed with the sign-up
-                    dao.registerUser(mail, pass);
+                    dao.registerUser(mail, pass,ten);
                     startActivity(new Intent(DangKyActivity.this, DangNhapActivity.class));
                     finishAffinity();
                     Toast.makeText(DangKyActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
@@ -114,7 +116,6 @@ public class DangKyActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }
 

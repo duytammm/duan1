@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.DAO.User_DAO;
 import com.example.myapplication.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class DangNhapActivity extends AppCompatActivity {
+    User_DAO dao;
     private EditText edtTenDN, edtMatKhau;
     private ProgressDialog dialog;
     SharedPreferences userPreferences;
@@ -38,6 +40,7 @@ public class DangNhapActivity extends AppCompatActivity {
         dialog.setTitle("Thông báo");
         dialog.setMessage("Vui lòng chờ giây lát...");
         mAuth = FirebaseAuth.getInstance();
+        dao = new User_DAO(this);
 
         btDN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +69,11 @@ public class DangNhapActivity extends AppCompatActivity {
                         if(user.getEmail().equals(email) && user.getMatKhau().equals(password)){
                             Integer trangThaiInteger = user.getTrangThai();
                             Integer roleInteger = user.getRole();
+                            String id = user.getIdUser();
+                            String hoten = user.getHotenUser();
                             if (trangThaiInteger != null) {
                                 int trangThai = trangThaiInteger.intValue();
+//                                Toast.makeText(DangNhapActivity.this, "Trạng thái: " + trangThai, Toast.LENGTH_SHORT).show();
                                 if(trangThai == 1 ){
                                     if(roleInteger != null) {
                                         int role = roleInteger.intValue();
@@ -79,6 +85,11 @@ public class DangNhapActivity extends AppCompatActivity {
                                                 break;
                                             }
                                             case 2: {
+                                                SharedPreferences sharedPreferences = getSharedPreferences("DataID",MODE_PRIVATE);
+                                                SharedPreferences.Editor edit = sharedPreferences.edit();
+                                                edit.putString("id",id);
+                                                edit.putString("hoten",hoten);
+                                                edit.apply();
                                                 startActivity(new Intent(DangNhapActivity.this, MainActivity_NgheSi.class));
                                                 finishAffinity();
                                                 Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công!!!", Toast.LENGTH_SHORT).show();
@@ -92,6 +103,7 @@ public class DangNhapActivity extends AppCompatActivity {
                                             }
                                         }
                                     }
+
 
                                 }
                                 if(trangThai == 0) {
@@ -136,6 +148,7 @@ public class DangNhapActivity extends AppCompatActivity {
                         if (user != null && user.getEmail() != null && user.getMatKhau() != null) {
                             String mail = user.getEmail();
                             String pass = user.getMatKhau();
+                            String id = user.getIdUser();
                             if(mail.equals(email) && pass.equals(password)) {
                                 isUserFound = true;
                                 userPreferences = getSharedPreferences("DataUser",MODE_PRIVATE);
@@ -163,5 +176,4 @@ public class DangNhapActivity extends AppCompatActivity {
         });
 
     }
-
 }

@@ -7,6 +7,11 @@
     android:id="@+id/relativeLoisach"
     android:background="#1E1F26">
 
+    <Toolbar
+        android:id="@+id/tbPL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cvPlaylist"
         android:layout_width="match_parent"
