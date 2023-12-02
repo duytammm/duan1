@@ -46,7 +46,8 @@ public class Lst_Song_Adapter extends RecyclerView.Adapter<Lst_Song_Adapter.View
         } else {
             Glide.with(c).load(R.drawable.avatar_null).into(holder.imgSong);
         }
-        holder.imgPlay.setOnClickListener(new View.OnClickListener() {
+        holder.tvTenCS.setText(baiHat.getTenCaSi());
+        holder.imgLove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -63,14 +64,15 @@ public class Lst_Song_Adapter extends RecyclerView.Adapter<Lst_Song_Adapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imgSong, imgPlay;
-        private TextView tvNameSong;
+        private ImageView imgSong, imgLove;
+        private TextView tvNameSong,tvTenCS;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgSong = itemView.findViewById(R.id.imgSong);
             tvNameSong = itemView.findViewById(R.id.tvNameSong);
-            imgPlay = itemView.findViewById(R.id.imgPlay);
+            tvTenCS = itemView.findViewById(R.id.tvTenCS);
+            imgLove = itemView.findViewById(R.id.imgLove);
         }
     }
 

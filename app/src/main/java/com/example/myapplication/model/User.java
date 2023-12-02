@@ -13,6 +13,11 @@ public class User {
     public User() {
     }
 
+    public User(String hotenUser, String avatar) {
+        HotenUser = hotenUser;
+        Avatar = avatar;
+    }
+
     public User(String idUser, String email, String matKhau, String hotenUser, String sdt, int trangThai, int role, String avatar) {
         this.idUser = idUser;
         Email = email;

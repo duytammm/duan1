@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -16,17 +18,26 @@ import java.util.List;
 public class ListNS_Activity extends AppCompatActivity {
     private SearchView searchNS;
     private RecyclerView rcvLstNS;
+    private Button btXong;
     private User_DAO daoNS;
     private Lst_NS_Adapter nsAdapter;
     private void initView() {
         searchNS = findViewById(R.id.searchNS);
         rcvLstNS = findViewById(R.id.rcvLstNS);
+        btXong = findViewById(R.id.btXong);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_ns);
         initView();
+
+        btXong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         daoNS = new User_DAO(ListNS_Activity.this);
         fillrcvLstNS();

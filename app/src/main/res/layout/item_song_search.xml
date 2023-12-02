@@ -24,25 +24,39 @@
                 android:src="@drawable/avatar_null"
                 android:layout_marginRight="5dp"/>
 
-            <TextView
-                android:id="@+id/tvNameSong"
-                android:layout_width="260dp"
-                android:textColor="#fff"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ta còn yêu nhau"
-                android:maxLines="1"
-                android:layout_gravity="center"
-                android:ellipsize="marquee"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvNameSong"
+                    android:layout_width="260dp"
+                    android:textColor="#fff"
+                    android:layout_height="wrap_content"
+                    android:text="Ta còn yêu nhau"
+                    android:maxLines="1"
+                    android:layout_gravity="center"
+                    android:ellipsize="marquee"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvTenCS"
+                    android:layout_width="260dp"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:layout_height="wrap_content"
+                    android:text="tenccs"/>
+            </LinearLayout>
 
             <ImageView
-                android:id="@+id/imgPlay"
+                android:layout_gravity="center"
+                android:id="@+id/imgLove"
                 android:layout_weight="0"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:gravity="end"
-                android:src="@drawable/play_song"/>
+                android:src="@drawable/heart"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
