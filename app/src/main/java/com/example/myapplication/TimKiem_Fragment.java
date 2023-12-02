@@ -1,10 +1,11 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.myapplication.Adapter.TK_PlayList_Adapter;
 import com.example.myapplication.Adapter.TimKiem_TabLayout_Adapter;
 import com.example.myapplication.model.PlayList;
-import com.google.android.material.search.SearchBar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.database.DataSnapshot;
@@ -30,8 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimKiem_Fragment extends Fragment {
-    private SearchBar svTimKiem;
-    private ImageView imgLofi,imgPodcast, imgMelody;
+    private LinearLayout nextSearchAct;
     private RecyclerView rcvPlayListTK;
     private TabLayout tabLayout;
     private ViewPager2 vpg2;
@@ -47,16 +46,20 @@ public class TimKiem_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.timkiem_fragment,container,false);
-        svTimKiem = v.findViewById(R.id.svTimKiem);
+        nextSearchAct = v.findViewById(R.id.nextSearchAct);
         rcvPlayListTK = v.findViewById(R.id.rcvPlayListTK);
-//        imgMelody = v.findViewById(R.id.imgMelody);
-//        imgLofi = v.findViewById(R.id.imgLofi);
-//        imgPodcast = v.findViewById(R.id.imgPodcast);
         tabLayout = v.findViewById(R.id.tablayout);
         vpg2 = v.findViewById(R.id.vpg2);
 
         DoPlayList();
         TabLayout();
+
+        nextSearchAct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),SearchSong_Activity.class));
+            }
+        });
 
         return v;
     }
@@ -87,22 +90,22 @@ public class TimKiem_Fragment extends Fragment {
 
         //Set màu background cho tab
         /**tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                // Tab được chọn
-                tab.view.setBackgroundColor(Color.rgb(1,1,1));
-            }
+        @Override
+        public void onTabSelected(TabLayout.Tab tab) {
+        // Tab được chọn
+        tab.view.setBackgroundColor(Color.rgb(1,1,1));
+        }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                // Tab không được chọn
-                tab.view.setBackgroundColor(Color.GRAY);
-            }
+        @Override
+        public void onTabUnselected(TabLayout.Tab tab) {
+        // Tab không được chọn
+        tab.view.setBackgroundColor(Color.GRAY);
+        }
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                //Tab được chọn lại
-            }
+        @Override
+        public void onTabReselected(TabLayout.Tab tab) {
+        //Tab được chọn lại
+        }
         }); */
     }
 
@@ -115,7 +118,6 @@ public class TimKiem_Fragment extends Fragment {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("PLAYLIST");
-
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imgAvatar"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@drawable/avatar_null"
+        />
+
+    <TextView
+        android:id="@+id/tenNS"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        android:ellipsize="marquee"
+        android:text="Tên ca sĩ"/>
+
+</LinearLayout>

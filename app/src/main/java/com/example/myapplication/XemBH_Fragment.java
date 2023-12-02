@@ -1,12 +1,17 @@
 package com.example.myapplication;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,46 +24,31 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class XemBH_Activity extends AppCompatActivity {
+public class XemBH_Fragment extends Fragment {
+    private RecyclerView rcvLstMusic;
     private BaiHat_Adapter baiHatAdapter;
     private List<BaiHat> lstBaiHats = new ArrayList<>();
-    private Toolbar tb;
-    private RecyclerView rcvLstMusic;
-    private void initView() {
-        tb = findViewById(R.id.tb);
-        rcvLstMusic = findViewById(R.id.rcvLstMusic);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            // Thực hiện hành động quay về trang trước đó
-            onBackPressed();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_xem_bh);
-        initView();
+    }
 
-        setSupportActionBar(tb);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
-        getSupportActionBar().setTitle("Danh sách bài hát của tôi");
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.xembh_fragment,container,false);
+        rcvLstMusic = view.findViewById(R.id.rcvLstMusic);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("DataID",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("DataID",MODE_PRIVATE);
         String idUserCurrent = sharedPreferences.getString("id","");
 
         getDataAndDisplay(idUserCurrent);
+
+        return view;
     }
 
     private void getDataAndDisplay(String idUserCurrent) {
@@ -67,7 +57,7 @@ public class XemBH_Activity extends AppCompatActivity {
         seeTableReference.orderByChild("idUser").equalTo(idUserCurrent)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    public void onDataChange(@org.checkerframework.checker.nullness.qual.NonNull DataSnapshot snapshot) {
                         for (DataSnapshot seeSnapshot : snapshot.getChildren()) {
                             See seeModel = seeSnapshot.getValue(See.class);
                             if (seeModel != null && seeModel.getIdBH() > 0) {
@@ -77,8 +67,8 @@ public class XemBH_Activity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(XemBH_Activity.this, "Lỗi: " + error, Toast.LENGTH_SHORT).show();
+                    public void onCancelled(@org.checkerframework.checker.nullness.qual.NonNull DatabaseError error) {
+                        Toast.makeText(getActivity(), "Lỗi: " + error, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -89,7 +79,7 @@ public class XemBH_Activity extends AppCompatActivity {
         baiHatReference.child(String.valueOf(idBH))
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot baiHatSnapshot) {
+                    public void onDataChange(@org.checkerframework.checker.nullness.qual.NonNull DataSnapshot baiHatSnapshot) {
                         BaiHat baiHatModel = baiHatSnapshot.getValue(BaiHat.class);
                         if (baiHatModel != null) {
                             lstBaiHats.add(baiHatModel);
@@ -98,15 +88,15 @@ public class XemBH_Activity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(XemBH_Activity.this, "Lỗi: " + error, Toast.LENGTH_SHORT).show();
+                    public void onCancelled(@org.checkerframework.checker.nullness.qual.NonNull DatabaseError error) {
+                        Toast.makeText(getActivity(), "Lỗi: " + error, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
     private void updateRecyclerView() {
         // Cập nhật RecyclerView
-        baiHatAdapter = new BaiHat_Adapter(XemBH_Activity.this, lstBaiHats);
-        LinearLayoutManager manager = new LinearLayoutManager(XemBH_Activity.this);
+        baiHatAdapter = new BaiHat_Adapter(getActivity(), lstBaiHats);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         rcvLstMusic.setLayoutManager(manager);
         rcvLstMusic.setAdapter(baiHatAdapter);
         baiHatAdapter.notifyDataSetChanged();

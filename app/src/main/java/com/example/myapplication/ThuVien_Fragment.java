@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +39,18 @@ public class ThuVien_Fragment extends Fragment {
         linearThemNS = v.findViewById(R.id.linearThemNS);
         linearThemPodcast = v.findViewById(R.id.linearThemPodcast);
 
+        clickListener();
 
         return v;
+    }
+
+    private void clickListener() {
+        linearThemNS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ListNS_Activity.class));
+            }
+        });
     }
 
 }

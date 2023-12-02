@@ -6,12 +6,29 @@
     android:background="#1E1F26"
     android:orientation="vertical">
 
-    <com.google.android.material.search.SearchBar
-        android:id="@+id/svTimKiem"
+    <LinearLayout
+        android:id="@+id/nextSearchAct"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#D0E1F9"
-        android:queryHint="Nhập bài hát bạn muốn tìm..."/>
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:src="@drawable/search"/>
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="start|center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Bạn muốn nghe gì?"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,87 +45,6 @@
         android:layout_width="match_parent"
         android:layout_height="155dp"
         android:background="#1E1F26"/>
-
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_weight="0"-->
-    <!--        android:layout_marginTop="10dp"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="horizontal">-->
-
-    <!--        <androidx.cardview.widget.CardView-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:layout_marginLeft="10dp"-->
-    <!--            app:cardCornerRadius="10dp">-->
-
-    <!--            <ImageView-->
-    <!--                android:id="@+id/imgLofi"-->
-    <!--                android:layout_width="117dp"-->
-    <!--                android:layout_height="205dp"-->
-    <!--                android:src="@drawable/timkiem_lofy" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="#Lofi"-->
-    <!--                android:textColor="#fff"-->
-    <!--                android:layout_gravity="bottom"-->
-    <!--                android:textStyle="bold"-->
-    <!--                android:layout_marginBottom="10dp"-->
-    <!--                android:layout_marginLeft="40dp"/>-->
-    <!--        </androidx.cardview.widget.CardView>-->
-
-    <!--        <androidx.cardview.widget.CardView-->
-    <!--            android:layout_marginLeft="10dp"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            app:cardCornerRadius="10dp">-->
-
-    <!--            <ImageView-->
-    <!--                android:id="@+id/imgPodcast"-->
-    <!--                android:layout_width="117dp"-->
-    <!--                android:layout_height="205dp"-->
-    <!--                android:src="@drawable/timkiem_podcast" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="#Podcast"-->
-    <!--                android:textColor="#fff"-->
-    <!--                android:layout_gravity="bottom"-->
-    <!--                android:textStyle="bold"-->
-    <!--                android:layout_marginBottom="10dp"-->
-    <!--                android:layout_marginLeft="25dp"/>-->
-    <!--        </androidx.cardview.widget.CardView>-->
-
-    <!--        <androidx.cardview.widget.CardView-->
-    <!--            android:layout_marginLeft="10dp"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:backgroundTint="@drawable/ic_launcher_background"-->
-    <!--            app:cardCornerRadius="10dp">-->
-
-    <!--            <ImageView-->
-    <!--                android:id="@+id/imgMelody"-->
-    <!--                android:layout_width="117dp"-->
-    <!--                android:layout_height="205dp"-->
-    <!--                android:src="@drawable/timkiem_melody" />-->
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="#Melody of Novamber"-->
-    <!--                android:textColor="#fff"-->
-    <!--                android:layout_gravity="bottom"-->
-    <!--                android:textStyle="bold"-->
-    <!--                android:layout_marginBottom="10dp"-->
-    <!--                android:layout_marginLeft="20dp"/>-->
-    <!--        </androidx.cardview.widget.CardView>-->
-    <!--    </LinearLayout>-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout"

@@ -52,7 +52,7 @@ public class MainActivity_NgheSi extends AppCompatActivity {
                 }
                 if (item.getItemId() == R.id.library) {
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.framLayout, new ThuVien_Fragment())
+                            .replace(R.id.framLayout, new XemBH_Fragment())
                             .commit();
                 }
                 if (item.getItemId() == R.id.account) {
