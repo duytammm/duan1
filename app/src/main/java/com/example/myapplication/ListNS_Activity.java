@@ -15,7 +15,7 @@ import com.example.myapplication.model.User;
 
 import java.util.List;
 
-public class ListNS_Activity extends AppCompatActivity {
+public class ListNS_Activity extends AppCompatActivity  {
     private SearchView searchNS;
     private RecyclerView rcvLstNS;
     private Button btXong;

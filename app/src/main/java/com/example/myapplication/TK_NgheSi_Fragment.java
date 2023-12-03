@@ -105,6 +105,13 @@ public class TK_NgheSi_Fragment extends Fragment {
     }
 
     private void clickListerner() {
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Update_User.class);
+                startActivity(i);
+            }
+        });
         linearThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

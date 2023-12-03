@@ -7,24 +7,20 @@
     android:orientation="vertical"
     android:background="#1E1F26">
 
-
     <LinearLayout
-        android:padding="20dp"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="50dp">
-
-            <ImageView
-                android:id="@+id/imgAvatar"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/nguoidung_tdt" />
-        </androidx.cardview.widget.CardView>
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imgAvatar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/nguoidung_tdt"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -57,9 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        android:layout_margin="15dp"
+        android:layout_margin="10dp"
         android:backgroundTint="#D0E1F9">
-
 
         <LinearLayout
             android:id="@+id/lnlmusic"
@@ -73,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:text="Music"
                 android:textColor="#3C84B9"
-                android:textSize="25dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 />
 
@@ -82,12 +77,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dùng thử miễn phí tháng đầu tiên "
-                android:textSize="23dp"/>
+                android:textSize="15dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="49.000đ"
-                android:textSize="25dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
             <TextView
@@ -95,24 +90,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nghe nhạc với chất lượng cao nhất "
-                android:textSize="23dp"/>
+                android:textSize="15dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="10dp">
+                android:gravity="center"
+                android:layout_marginTop="5dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_marginRight="30dp">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
                         android:baselineAligned="false"
                         app:srcCompat="@drawable/nguoidung_ads"
                         android:layout_marginBottom="5dp"/>
@@ -121,19 +117,19 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="Nghe nhạc không quảng cáo  "
-                        android:textSize="18dp"
+                        android:textSize="13dp"
                         android:gravity="center"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
                         android:baselineAligned="false"
                         app:srcCompat="@drawable/nguoidung_downloads"
                         android:layout_marginBottom="5dp"/>
@@ -142,7 +138,7 @@
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:text="Lưu trữ nhạc không giới hạn  "
-                        android:textSize="18dp"
+                        android:textSize="13dp"
                         android:gravity="center"/>
                 </LinearLayout>
 
@@ -157,9 +153,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
-        android:layout_margin="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="5dp"
         android:backgroundTint="#39496B">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -169,8 +167,8 @@
             android:layout_marginRight="30dp">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_margin="10dp"
                 app:srcCompat="@drawable/nguoidung_history" />
 
@@ -192,16 +190,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="5dp"
         android:backgroundTint="#39496B">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/nguoidung_playlist"
+                android:layout_margin="10dp" />
 
             <TextView
                 android:id="@+id/txtPlaylist"
@@ -211,13 +216,8 @@
                 android:textColor="@color/white"
                 android:textSize="25dp"
                 android:textStyle="bold"
-                android:layout_marginRight="30dp"/>
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                app:srcCompat="@drawable/nguoidung_playlist" />
+                android:layout_marginRight="70dp"
+                />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -227,9 +227,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="5dp"
         android:backgroundTint="#39496B">
 
         <LinearLayout
@@ -240,8 +241,8 @@
             android:layout_marginRight="130dp">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_margin="10dp"
                 app:srcCompat="@drawable/nguoidung_setting" />
 
@@ -264,9 +265,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginBottom="5dp"
         android:backgroundTint="#39496B">
 
         <LinearLayout
@@ -277,8 +279,8 @@
             android:layout_marginRight="100dp">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_margin="10dp"
                 app:srcCompat="@drawable/nguoidung_logout" />
 

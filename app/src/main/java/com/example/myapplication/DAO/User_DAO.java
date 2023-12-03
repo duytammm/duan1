@@ -136,4 +136,28 @@ public class User_DAO {
         });
     }
 
+    //List NS của thư viện
+    public interface getLstnsthuvien {
+        void getLstTV(List<User> lstNSTV);
+    }
+
+    public void getLstNSTV(String id, getLstnsthuvien lstnsthuvien) {
+        DatabaseReference nsReference = FirebaseDatabase.getInstance().getReference("USER");
+        nsReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                List<User> lst = new ArrayList<>();
+                for(DataSnapshot dataSnapshot : task.getResult().getChildren()) {
+                    if(dataSnapshot.exists()) {
+                        User ns = dataSnapshot.getValue(User.class);
+                        if(ns.getIdUser().equals(id)) {
+                            lst.add(ns);
+                        }
+                    }
+                }
+                lstnsthuvien.getLstTV(lst);
+            }
+        });
+    }
+
 }

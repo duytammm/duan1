@@ -54,20 +54,12 @@ public class TK_NguoiDung_fragment extends Fragment {
         imgAvatar = v.findViewById(R.id.imgAvatar);
 
         showInformation();
-
-        cvDangXuat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), DangNhapActivity.class);
-                startActivity(i);
-                getActivity().finishAffinity();
-            }
-        });
+        clickListener();
 
         return v;
     }
 
-    public void showInformation() {
+    private void showInformation() {
         SharedPreferences inforSharedPreferences = getActivity().getSharedPreferences("DataUser",MODE_PRIVATE);
         String mail = inforSharedPreferences.getString("email","");
 
@@ -111,5 +103,26 @@ public class TK_NguoiDung_fragment extends Fragment {
             }
         });
     }
+
+    private void clickListener() {
+        cvDangXuat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), DangNhapActivity.class);
+                startActivity(i);
+                getActivity().finishAffinity();
+            }
+        });
+
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Update_User.class);
+                startActivity(i);
+            }
+        });
+    }
+
+
 
 }
