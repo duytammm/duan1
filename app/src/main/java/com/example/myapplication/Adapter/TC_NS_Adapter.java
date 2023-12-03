@@ -3,6 +3,7 @@ package com.example.myapplication.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.myapplication.PlayList_Activity;
+import com.example.myapplication.Lst_NSSongTC_Activity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.User;
 
@@ -31,13 +32,13 @@ public class TC_NS_Adapter extends RecyclerView.Adapter<TC_NS_Adapter.ViewHolder
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TC_NS_Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = ((Activity)c).getLayoutInflater().inflate(R.layout.item_trangchu_ns,null,false);
-        return new ViewHolder(v);
+        return new TC_NS_Adapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TC_NS_Adapter.ViewHolder holder, int position) {
         User ns = lstNS.get(position);
         if(ns.getHotenUser().equals("")) {
             holder.tvTenNS.setText(ns.getHotenUser() + "Hãy đoán xem tôi là ai!");
@@ -49,7 +50,13 @@ public class TC_NS_Adapter extends RecyclerView.Adapter<TC_NS_Adapter.ViewHolder
         holder.linearNS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                c.startActivity(new Intent(c, PlayList_Activity.class));
+                SharedPreferences NS_tc = c.getSharedPreferences("idNSTC",Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = NS_tc.edit();
+                edit.putString("id",ns.getIdUser());
+                edit.putString("ten",ns.getHotenUser());
+                edit.putString("anh",ns.getAvatar());
+                edit.apply();
+                c.startActivity(new Intent(c, Lst_NSSongTC_Activity.class));
             }
         });
     }
