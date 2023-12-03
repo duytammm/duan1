@@ -79,24 +79,6 @@ public class Lst_NSSongTC_Activity extends AppCompatActivity {
         String idNScurent = sharedPreferences.getString("id","");
         String ten = sharedPreferences.getString("ten","");
         txtTopNhac.setText(ten);
-//        String anh = sharedPreferences.getString("anh", "");
-//        // Kiểm tra xem có đường dẫn ảnh hay không
-//        if (!TextUtils.isEmpty(anh)) {
-//            File file = new File(anh);
-//            if (file.exists()) {
-//                // Tạo Bitmap từ đường dẫn ảnh
-//                Bitmap bitmap = BitmapFactory.decodeFile(anh);
-//
-//                // Set Bitmap làm background cho CollapsingToolbarLayout
-//                Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-//                collaPlayList.setBackground(drawable);
-////                if (ivNhac != null) {
-////                    ivNhac.setImageDrawable(drawable);
-////                }
-//            } else {
-//
-//            }
-//        }
 
         getDataAndDisplay(idNScurent);
         getAnh(idNScurent);
