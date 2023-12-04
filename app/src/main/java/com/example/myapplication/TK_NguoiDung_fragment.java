@@ -121,6 +121,13 @@ public class TK_NguoiDung_fragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        cvPlaylistYT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),PlayList_YeuThich_Activity.class));
+            }
+        });
     }
 
 

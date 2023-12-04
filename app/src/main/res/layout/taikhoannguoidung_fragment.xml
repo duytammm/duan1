@@ -212,7 +212,7 @@
                 android:id="@+id/txtPlaylist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Playlist yeu thich "
+                android:text="Playlist yêu thích "
                 android:textColor="@color/white"
                 android:textSize="25dp"
                 android:textStyle="bold"
