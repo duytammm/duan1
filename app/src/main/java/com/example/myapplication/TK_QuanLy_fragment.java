@@ -108,13 +108,13 @@ public class TK_QuanLy_fragment extends Fragment {
         cvQLBH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), QuanLyPLBH_Activity.class));
             }
         });
         cvQLHD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), QuanLyHD_Activity.class));
             }
         });
         cvSetting.setOnClickListener(new View.OnClickListener() {

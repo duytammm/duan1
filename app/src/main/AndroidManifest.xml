@@ -18,6 +18,21 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="33">
         <activity
+            android:name=".LichSu_BH_ND_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".NS_SuattBH_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".LichSuBH_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLyPLBH_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLyHD_Activity"
+            android:exported="false" />
+        <activity
             android:name=".PlayList_YeuThich_Activity"
             android:exported="false" />
         <activity

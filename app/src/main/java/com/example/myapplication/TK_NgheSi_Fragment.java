@@ -125,12 +125,33 @@ public class TK_NgheSi_Fragment extends Fragment {
             }
         });
 
+        linearHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LichSuBH_Activity.class));
+            }
+        });
+
         linearLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), DangNhapActivity.class);
                 startActivity(i);
                 getActivity().finishAffinity();
+            }
+        });
+
+        linearSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SettingActivity.class));
+            }
+        });
+
+        linearSua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), NS_SuattBH_Activity.class));
             }
         });
     }

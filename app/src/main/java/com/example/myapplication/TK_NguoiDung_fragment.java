@@ -128,8 +128,20 @@ public class TK_NguoiDung_fragment extends Fragment {
                 startActivity(new Intent(getContext(),PlayList_YeuThich_Activity.class));
             }
         });
+
+        cvLichSuNghe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),LichSu_BH_ND_Activity.class));
+            }
+        });
+
+        cvCaiDat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),SettingActivity.class));
+            }
+        });
     }
-
-
 
 }
