@@ -1,10 +1,12 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import com.example.myapplication.model.BaiHat;
 import com.example.myapplication.model.PlayList_BaiHat;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,20 +35,22 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayList_Activity extends AppCompatActivity {
+public class CT_Playlist_AddSong extends AppCompatActivity {
     private Toolbar tbPL;
-    private RecyclerView recyclerviewDSNhac;
-    private CollapsingToolbarLayout collaPlayList;
     private ImageView ivNhac;
+    private CollapsingToolbarLayout collaPlayList;
     private TextView txtTopNhac;
-    private BaiHat_Adapter adapter;
+    private FloatingActionButton floatAddBH;
+    private RecyclerView recyclerviewDSNhac;
+    private BaiHat_Adapter baiHatAdapter;
     private List<BaiHat> lstBaiHats = new ArrayList<>();
+
     private void initView() {
+        floatAddBH = findViewById(R.id.floatAddBH);
         recyclerviewDSNhac = findViewById(R.id.recyclerviewDSNhac);
-        collaPlayList = findViewById(R.id.collaPlayList);
+        tbPL = findViewById(R.id.tbPL);
         ivNhac = findViewById(R.id.ivNhac);
         txtTopNhac = findViewById(R.id.txtTopNhac);
-        tbPL = findViewById(R.id.tbPL);
 
         setSupportActionBar(tbPL);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -64,19 +69,23 @@ public class PlayList_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_list);
+        setContentView(R.layout.activity_ct_playlist_add_song);
         initView();
-        fillAdapter();
-    }
+        floatAddBH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CT_Playlist_AddSong.this, AllSong_Activity.class);
+                startActivity(i);
+            }
+        });
 
-    private void fillAdapter() {
-        SharedPreferences sharedPreferences = getSharedPreferences("idPLTC", Context.MODE_PRIVATE);
-        String idPLcurrent = sharedPreferences.getString("id","");
+        SharedPreferences sharedPreferences = getSharedPreferences("idPL", Context.MODE_PRIVATE);;
+        String currentPL = sharedPreferences.getString("id","");
         String ten = sharedPreferences.getString("ten","");
-        getSupportActionBar().setTitle(ten);
         txtTopNhac.setText(ten);
+        getSupportActionBar().setTitle(ten);
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Bia_PlayList").child(idPLcurrent);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Bia_PlayList").child(currentPL);
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri downloadUrl) {
@@ -97,6 +106,10 @@ public class PlayList_Activity extends AppCompatActivity {
             }
         });
 
+        fillAdapter(currentPL);
+    }
+
+    private void fillAdapter(String idPLcurrent) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("PLAYLIST_BAIHAT");
         reference.orderByChild("idpl").equalTo(idPLcurrent)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -114,7 +127,7 @@ public class PlayList_Activity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(PlayList_Activity.this, "Lỗi: " + error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CT_Playlist_AddSong.this, "Lỗi: " + error, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -135,17 +148,18 @@ public class PlayList_Activity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(PlayList_Activity.this, "Lỗi: " + error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CT_Playlist_AddSong.this, "Lỗi: " + error, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
     private void updateRecyclerView() {
         // Cập nhật RecyclerView
-        adapter = new BaiHat_Adapter(PlayList_Activity.this, lstBaiHats);
-        LinearLayoutManager manager = new LinearLayoutManager(PlayList_Activity.this);
+        baiHatAdapter = new BaiHat_Adapter(CT_Playlist_AddSong.this, lstBaiHats);
+        LinearLayoutManager manager = new LinearLayoutManager(CT_Playlist_AddSong.this);
         recyclerviewDSNhac.setLayoutManager(manager);
-        recyclerviewDSNhac.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        recyclerviewDSNhac.setAdapter(baiHatAdapter);
+        baiHatAdapter.notifyDataSetChanged();
     }
+
 
 }

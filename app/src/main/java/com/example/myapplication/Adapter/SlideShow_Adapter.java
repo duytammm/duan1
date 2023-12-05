@@ -1,7 +1,7 @@
 package com.example.myapplication.Adapter;
 
 import android.content.Context;
-import android.view.ContextMenu;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.CT_Play_nhac;
 import com.example.myapplication.R;
 import com.example.myapplication.model.SlideShow;
 
@@ -37,6 +38,19 @@ public class SlideShow_Adapter extends PagerAdapter {
         if(slideShow != null) {
             Glide.with(c).load(slideShow.getResourceId()).into(imgBanner);
         }
+
+        // Xử lý sự kiện nhấp vào
+        imgBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // chuyển hướng đến CT_Play_nhac
+                Intent intent = new Intent(c, CT_Play_nhac.class);
+                // Truyền ID BaiHat, sang hoạt động tiếp theo
+                intent.putExtra("baihat_id", slideShow.getId());
+                c.startActivity(intent);
+            }
+        });
+
         //ADD VIEW VÀO VIEWGROUP
         container.addView(view);
 

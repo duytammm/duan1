@@ -1,22 +1,22 @@
 package com.example.myapplication.model;
 
 public class PlayList {
-    private int idPlayList;
+    private String idPlayList;
     private String TenPlayList, BiaPlayList;
 
     public PlayList() {}
 
-    public PlayList(int idPlayList, String tenPlayList, String biaPlayList) {
+    public PlayList(String idPlayList, String tenPlayList, String biaPlayList) {
         this.idPlayList = idPlayList;
         TenPlayList = tenPlayList;
         BiaPlayList = biaPlayList;
     }
 
-    public int getIdPlayList() {
+    public String getIdPlayList() {
         return idPlayList;
     }
 
-    public void setIdPlayList(int idPlayList) {
+    public void setIdPlayList(String idPlayList) {
         this.idPlayList = idPlayList;
     }
 

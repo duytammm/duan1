@@ -104,16 +104,16 @@ public class Main_Home extends Fragment {
 
         return view;
     }
-
     private List<SlideShow> lst() {
         lst = new ArrayList<>();
-        lst.add(new SlideShow(R.drawable.trangchu_banner1));
-        lst.add(new SlideShow(R.drawable.trangchu_banner2));
-        lst.add(new SlideShow(R.drawable.trangchu_banner3));
-        lst.add(new SlideShow(R.drawable.trangchu_banner4));
-        lst.add(new SlideShow(R.drawable.trangchu_banner5));
+        lst.add(new SlideShow(1,R.drawable.trangchu_banner1));
+        lst.add(new SlideShow(2,R.drawable.trangchu_banner2));
+        lst.add(new SlideShow(3,R.drawable.trangchu_banner3));
+        lst.add(new SlideShow(4,R.drawable.trangchu_banner4));
+        lst.add(new SlideShow(5,R.drawable.trangchu_banner5));
         return lst;
     }
+
     private void setAdapter() {
         pldao.getPlayList(new PlayList_DAO.getListPlayList() {
             @Override

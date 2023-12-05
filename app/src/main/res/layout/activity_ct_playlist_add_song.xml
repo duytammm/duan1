@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/relativeLoisach"
+    tools:context=".CT_Playlist_AddSong"
     android:background="#1E1F26">
 
     <androidx.appcompat.widget.Toolbar
@@ -41,6 +42,7 @@
                 android:id="@+id/ivNhac"
                 android:layout_width="500px"
                 android:layout_height="110dp"
+                android:scaleType="centerCrop"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/playlist_nhac"
                 />
@@ -59,18 +61,18 @@
     </androidx.cardview.widget.CardView>
 
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/floatDS"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="191dp"-->
-<!--        android:layout_marginBottom="300dp"-->
-<!--        android:backgroundTint="#E6F4F8"-->
-<!--        android:src="@drawable/playlist_ds" />-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatAddBH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="191dp"
+        android:layout_marginBottom="300dp"
+        android:backgroundTint="#E6F4F8"
+        android:src="@drawable/playlist_ds" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewDSNhac"

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.model.HoaDon;
 import com.example.myapplication.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,9 +33,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class TK_NguoiDung_fragment extends Fragment {
+    private LinearLayout lnlmusic;
     private ImageView imgAvatar;
     private TextView txtDungMP,txtDungTP, tvTenND, tvMail;
-    private CardView cvLichSuNghe,cvPlaylistYT,cvCaiDat,cvDangXuat;
+    private CardView cvLichSuNghe,cvPlaylistYT,cvCaiDat,cvDangXuat,idThanhToan;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +55,12 @@ public class TK_NguoiDung_fragment extends Fragment {
         tvTenND = v.findViewById(R.id.tvTenND);
         tvMail = v.findViewById(R.id.tvMail);
         imgAvatar = v.findViewById(R.id.imgAvatar);
+        idThanhToan = v.findViewById(R.id.idThanhToan);
+        lnlmusic = v.findViewById(R.id.lnlmusic);
 
         showInformation();
         clickListener();
+        checkHoaDON();
 
         return v;
     }
@@ -142,6 +148,50 @@ public class TK_NguoiDung_fragment extends Fragment {
                 startActivity(new Intent(getContext(),SettingActivity.class));
             }
         });
+
+        idThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),ThanhToan_Activity.class));
+            }
+        });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        checkHoaDON();
+    }
+
+    private void checkHoaDON() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("DataUser", MODE_PRIVATE);
+        String idUser = sharedPreferences.getString("id", "");
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("HOADON");
+        reference.orderByChild("idUser").equalTo(idUser)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                HoaDon hoaDon = dataSnapshot.getValue(HoaDon.class);
+                                if (hoaDon.getTrangthai() == 1) {
+                                    idThanhToan.setVisibility(View.GONE);
+                                    lnlmusic.setVisibility(View.GONE);
+                                } else {
+                                    idThanhToan.setVisibility(View.VISIBLE);
+                                    lnlmusic.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Xử lý khi có lỗi
+                    }
+                });
+    }
+
 
 }

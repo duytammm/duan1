@@ -1,6 +1,8 @@
 package com.example.myapplication.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.PlayList_Activity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.PlayList;
 
@@ -47,7 +50,12 @@ public class TK_PlayList_Adapter extends RecyclerView.Adapter<TK_PlayList_Adapte
         holder.rltPL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SharedPreferences sharedPreferences = c.getSharedPreferences("idPLTC",Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("id", playList.getIdPlayList());
+                edit.putString("ten", playList.getTenPlayList());
+                edit.apply();
+                c.startActivity(new Intent(c, PlayList_Activity.class));
             }
         });
     }

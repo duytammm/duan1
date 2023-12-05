@@ -154,6 +154,7 @@ public class DangNhapActivity extends AppCompatActivity {
                                 userPreferences = getSharedPreferences("DataUser",MODE_PRIVATE);
                                 SharedPreferences.Editor edtUser = userPreferences.edit();
                                 edtUser.putString("email",email);
+                                edtUser.putString("id",id);
                                 edtUser.apply();
                                 DN(email,password);
                                 return;

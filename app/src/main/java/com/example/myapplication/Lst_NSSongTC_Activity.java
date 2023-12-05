@@ -80,32 +80,30 @@ public class Lst_NSSongTC_Activity extends AppCompatActivity {
         String ten = sharedPreferences.getString("ten","");
         txtTopNhac.setText(ten);
 
-        getDataAndDisplay(idNScurent);
-        getAnh(idNScurent);
-    }
-
-    private void getAnh(String idNScurent) {
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Avatar_User");
-        storageReference.child(idNScurent).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Avatar_User").child(idNScurent);
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 // Lay link anh
                 String imageUrl = uri.toString();
-                // load len
-                Glide.with(Lst_NSSongTC_Activity.this).load(imageUrl).error(R.drawable.avatar_null).into(ivNhac);
-                if (!TextUtils.isEmpty(imageUrl)) {
-                    File file = new File(imageUrl);
-                    if (file.exists()) {
-                        // Tạo Bitmap từ đường dẫn ảnh
-                        Bitmap bitmap = BitmapFactory.decodeFile(imageUrl);
+                if (!isDestroyed()) {
+                    // Load image with Glide here
+                    Glide.with(getApplicationContext()).load(imageUrl).into(ivNhac);
+                    if (!TextUtils.isEmpty(imageUrl)) {
+                        File file = new File(imageUrl);
+                        if (file.exists()) {
+                            // Tạo Bitmap từ đường dẫn ảnh
+                            Bitmap bitmap = BitmapFactory.decodeFile(imageUrl);
 
-                        // Set Bitmap làm background cho CollapsingToolbarLayout
-                        Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-                        collaPlayList.setBackground(drawable);
+                            Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+                            collaPlayList.setBackground(drawable);
+                        }
                     }
                 }
             }
         });
+
+        getDataAndDisplay(idNScurent);
     }
 
 

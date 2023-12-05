@@ -3,6 +3,7 @@ package com.example.myapplication.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,11 @@ public class TC_PlayList_Adapter extends RecyclerView.Adapter<TC_PlayList_Adapte
         holder.playlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = c.getSharedPreferences("idPLTC",Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("id", playlist.getIdPlayList());
+                edit.putString("ten", playlist.getTenPlayList());
+                edit.apply();
                 c.startActivity(new Intent(c, PlayList_Activity.class));
             }
         });

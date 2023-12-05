@@ -66,15 +66,18 @@ public class TK_QuanLy_fragment extends Fragment {
         SharedPreferences inforSharedPreferences = getActivity().getSharedPreferences("DataUser",MODE_PRIVATE);
         String mail = inforSharedPreferences.getString("email","");
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Avatar_User").child(mail);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Avatar_User").child(mail).child(mail);
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri downloadUrl) {
                 // Lay link anh
                 String imageUrl = downloadUrl.toString();
-                Toast.makeText(getActivity(), "Loi: " + imageUrl, Toast.LENGTH_SHORT).show();
                 // load len
-                Glide.with(getActivity()).load(imageUrl).error(R.drawable.avatar_null).into(imgAvatar);
+                if(!imageUrl.equals("")){
+                    Glide.with(requireContext().getApplicationContext()).load(imageUrl).error(R.drawable.avatar_null).into(imgAvatar);
+                } else {
+                    Glide.with(requireContext().getApplicationContext()).load(R.drawable.avatar_null).into(imgAvatar);
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
